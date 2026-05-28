@@ -100,8 +100,12 @@ function Navbar() {
             <a key={n.id} href={`#${n.id}`} className={`nav-link ${active === n.id ? 'active' : ''}`}>{n.label}</a>
           ))}
         </div>
-        <button className="theme-toggle" onClick={() => window.toggleTheme()} aria-label="Toggle theme">
-          <Icon name="sun" size={16}/>
+        <button className="theme-toggle" onClick={() => window.toggleTheme()} aria-label="Toggle theme" title="Toggle theme">
+          <span className="tt-pill">
+            <span className="tt-icon tt-sun" aria-hidden="true"><Icon name="sun" size={12} stroke={2.2}/></span>
+            <span className="tt-icon tt-moon" aria-hidden="true"><Icon name="moon" size={12} stroke={2.2}/></span>
+            <span className="tt-thumb" aria-hidden="true"/>
+          </span>
         </button>
         <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Menu">
           <Icon name={open ? 'close' : 'menu'} size={20}/>

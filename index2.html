@@ -25,46 +25,44 @@
    FOLIO v2 — editorial / hand-crafted aesthetic
    ============================================================ */
 :root, [data-theme="light"] {
-  --paper:        #f1e9d9;
-  --paper-2:      #ede4d1;
-  --paper-3:      #e6dcc4;
-  --ink:          #1f1a14;
-  --ink-2:        #4a4136;
-  --ink-3:        #786b58;
-  --ink-soft:     #9a8e7a;
-  --rule:         rgba(31,26,20,0.12);
-  --rule-2:       rgba(31,26,20,0.20);
-  --rule-3:       rgba(31,26,20,0.06);
+  --paper:        #fbfbfd;
+  --paper-2:      #f5f5f7;
+  --paper-3:      #ececef;
+  --ink:          #1d1d1f;
+  --ink-2:        #424245;
+  --ink-3:        #6e6e73;
+  --ink-soft:     #86868b;
+  --rule:         rgba(0,0,0,0.08);
+  --rule-2:       rgba(0,0,0,0.14);
+  --rule-3:       rgba(0,0,0,0.04);
   --accent:       #c8552a;
   --accent-2:     #8a3a1c;
-  --accent-soft:  rgba(200,85,42,0.14);
-  --accent-glow:  rgba(200,85,42,0.32);
+  --accent-soft:  rgba(200,85,42,0.10);
+  --accent-glow:  rgba(200,85,42,0.24);
   --hi:           #ecc34f;
-  --on-accent:    #fbf5e7;
-  --shadow-1:     0 1px 2px rgba(31,26,20,0.06), 0 8px 24px -10px rgba(31,26,20,0.18);
-  --shadow-2:     0 1px 2px rgba(31,26,20,0.06), 0 20px 48px -16px rgba(31,26,20,0.22), 0 40px 80px -32px rgba(31,26,20,0.18);
-  --grain-op:     0.05;
+  --on-accent:    #ffffff;
+  --shadow-1:     0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -10px rgba(0,0,0,0.10);
+  --shadow-2:     0 1px 2px rgba(0,0,0,0.04), 0 20px 48px -16px rgba(0,0,0,0.14), 0 40px 80px -32px rgba(0,0,0,0.10);
 }
 [data-theme="dark"] {
-  --paper:        #18130e;
-  --paper-2:      #1f1a13;
-  --paper-3:      #261f17;
-  --ink:          #f4ecd9;
-  --ink-2:        #cdc1a8;
-  --ink-3:        #9a8e75;
-  --ink-soft:     #6e6452;
-  --rule:         rgba(244,236,217,0.14);
-  --rule-2:       rgba(244,236,217,0.22);
-  --rule-3:       rgba(244,236,217,0.06);
+  --paper:        #000000;
+  --paper-2:      #1c1c1e;
+  --paper-3:      #2c2c2e;
+  --ink:          #f5f5f7;
+  --ink-2:        #d2d2d7;
+  --ink-3:        #86868b;
+  --ink-soft:     #6e6e73;
+  --rule:         rgba(255,255,255,0.10);
+  --rule-2:       rgba(255,255,255,0.18);
+  --rule-3:       rgba(255,255,255,0.06);
   --accent:       #e8794a;
   --accent-2:     #f0a072;
-  --accent-soft:  rgba(232,121,74,0.18);
-  --accent-glow:  rgba(232,121,74,0.45);
+  --accent-soft:  rgba(232,121,74,0.14);
+  --accent-glow:  rgba(232,121,74,0.35);
   --hi:           #f0c75c;
-  --on-accent:    #1a1410;
+  --on-accent:    #000000;
   --shadow-1:     0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -10px rgba(0,0,0,0.5);
   --shadow-2:     0 1px 2px rgba(0,0,0,0.4), 0 20px 48px -16px rgba(0,0,0,0.6), 0 40px 80px -32px rgba(0,0,0,0.6);
-  --grain-op:     0.08;
 }
 
 * { box-sizing: border-box; }
@@ -74,21 +72,6 @@ html { scroll-behavior: smooth; }
 body { overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--on-accent); }
 
-/* Paper grain — subtle film noise */
-.grain {
-  position: fixed; inset: 0; pointer-events: none; z-index: 1;
-  opacity: var(--grain-op);
-  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  mix-blend-mode: multiply;
-}
-[data-theme="dark"] .grain { mix-blend-mode: screen; }
-
-/* Soft scroll-anchored ink blobs */
-.blob { position: fixed; pointer-events: none; z-index: 0; border-radius: 50%; filter: blur(110px); opacity: 0.45;
-  transition: opacity 0.5s ease; }
-.blob.b1 { width: 540px; height: 540px; top: -120px; left: -160px; background: var(--accent-soft); }
-.blob.b2 { width: 600px; height: 600px; top: 55vh; right: -200px; background: rgba(236,195,79,0.18); }
-.blob.b3 { width: 480px; height: 480px; bottom: -200px; left: 30vw; background: var(--accent-soft); }
 
 /* ============================================================
    Typography
@@ -105,7 +88,7 @@ p  { color: var(--ink-2); line-height: 1.65; margin: 0; }
 .serif { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
 
 /* Character-by-character reveal for headlines */
-.split { display: inline-block; }
+.split { display: inline-block; white-space: nowrap; }
 .split .ch {
   display: inline-block; transform: translateY(110%);
   opacity: 0; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
@@ -113,7 +96,7 @@ p  { color: var(--ink-2); line-height: 1.65; margin: 0; }
 }
 .split .ch.sp { width: 0.28em; }
 .split.in .ch { transform: translateY(0); opacity: 1; }
-.split-line { display: inline-block; overflow: hidden; vertical-align: top; }
+.split-line { display: inline-block; overflow: hidden; vertical-align: top; white-space: nowrap; padding-bottom: 0.08em; }
 
 /* Underline that draws */
 .hl { position: relative; white-space: nowrap; }
@@ -205,32 +188,6 @@ section { padding: 140px 0; position: relative; z-index: 2; scroll-margin-top: 8
 .mag { transition: transform 0.45s cubic-bezier(0.16,1,0.3,1); }
 
 /* ============================================================
-   Cursor
-   ============================================================ */
-.cursor-dot, .cursor-ring {
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-  border-radius: 50%; mix-blend-mode: difference;
-}
-.cursor-dot { width: 6px; height: 6px; background: #ffffff; transform: translate(-50%,-50%); transition: opacity 0.2s ease; }
-.cursor-ring {
-  width: 36px; height: 36px; border: 1.4px solid #ffffff;
-  transform: translate(-50%,-50%);
-  transition: width 0.3s cubic-bezier(0.2,1,0.3,1), height 0.3s cubic-bezier(0.2,1,0.3,1), background 0.3s ease, opacity 0.3s ease;
-}
-.cursor-ring.hovering { width: 64px; height: 64px; background: rgba(255,255,255,0.08); }
-.cursor-ring.active { width: 22px; height: 22px; }
-.cursor-ring.text {
-  width: 88px; height: 88px;
-  background: var(--accent); border-color: var(--accent);
-  mix-blend-mode: normal; color: var(--on-accent);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-}
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
-}
-
-/* ============================================================
    Navbar
    ============================================================ */
 .nav {
@@ -268,13 +225,44 @@ section { padding: 140px 0; position: relative; z-index: 2; scroll-margin-top: 8
 .nav-link:hover::before, .nav-link.active::before { transform: scaleX(1); }
 .nav-link.active { color: var(--ink); font-weight: 500; }
 
+/* iPhone-style theme pill switch */
 .theme-toggle {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: var(--paper); border: 1px solid var(--rule-2);
-  display: grid; place-items: center; cursor: pointer; color: var(--ink);
-  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
+  background: none; border: none; padding: 0; cursor: pointer; display: inline-flex;
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.2,1);
 }
-.theme-toggle:hover { transform: rotate(30deg); background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.theme-toggle:hover { transform: scale(1.06); }
+.theme-toggle:active { transform: scale(0.96); }
+.tt-pill {
+  position: relative; display: inline-flex; align-items: center;
+  width: 50px; height: 28px; border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.12), 0 1px 0 rgba(255,255,255,0.6);
+  transition: background 0.4s ease;
+}
+[data-theme="dark"] .tt-pill {
+  background: var(--accent);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.3), 0 1px 0 rgba(255,255,255,0.05);
+}
+.tt-icon {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 14px; height: 14px; display: grid; place-items: center;
+  transition: opacity 0.3s ease, color 0.3s ease; pointer-events: none;
+}
+.tt-sun  { left: 7px;  color: #c8870a; opacity: 1; }
+.tt-moon { right: 7px; color: #4a4a55; opacity: 0.45; }
+[data-theme="dark"] .tt-sun  { color: rgba(0,0,0,0.55); opacity: 0.45; }
+[data-theme="dark"] .tt-moon { color: rgba(0,0,0,0.85); opacity: 1; }
+.tt-thumb {
+  position: absolute; top: 2px; left: 2px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.10), 0 3px 8px rgba(0,0,0,0.22);
+  transition: left 0.36s cubic-bezier(0.5,1.4,0.5,1), background 0.3s ease, box-shadow 0.3s ease;
+}
+[data-theme="dark"] .tt-thumb {
+  left: 24px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.20), 0 3px 8px rgba(0,0,0,0.40);
+}
 
 .mobile-toggle { display: none; background: none; border: none; color: var(--ink); cursor: pointer; padding: 8px; }
 
@@ -398,11 +386,6 @@ a { color: inherit; }
 </style>
 </head>
 <body>
-  <div class="grain"></div>
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-
   <div id="splash">
     <div class="splash-inner">
       <div class="splash-mark">M<span class="acc">.</span>I<span class="acc">.</span>K</div>
@@ -412,9 +395,6 @@ a { color: inherit; }
   </div>
 
   <div id="prog"></div>
-
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
 
   <div id="root"></div>
 
@@ -449,33 +429,6 @@ a { color: inherit; }
     const mo = new MutationObserver(observeAll);
     mo.observe(document.getElementById('root'), { childList: true, subtree: true });
 
-    // ---- Magnetic cursor ----
-    const dot = document.querySelector('.cursor-dot');
-    const ring = document.querySelector('.cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    window.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`; });
-    function loop() {
-      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
-      requestAnimationFrame(loop);
-    }
-    loop();
-    window.addEventListener('mousedown', () => ring.classList.add('active'));
-    window.addEventListener('mouseup',   () => ring.classList.remove('active'));
-    // delegate hover detection
-    document.addEventListener('mouseover', (e) => {
-      const t = e.target.closest('a, button, .mag, [role="button"]');
-      if (t) {
-        ring.classList.add('hovering');
-        const txt = t.getAttribute('data-cursor');
-        if (txt) { ring.classList.add('text'); ring.textContent = txt; } else { ring.classList.remove('text'); ring.textContent = ''; }
-      }
-    });
-    document.addEventListener('mouseout', (e) => {
-      const t = e.target.closest('a, button, .mag, [role="button"]');
-      if (t) { ring.classList.remove('hovering','text'); ring.textContent = ''; }
-    });
-
     // ---- Magnetic offset for .mag elements ----
     document.addEventListener('mousemove', (e) => {
       document.querySelectorAll('.mag').forEach(el => {
@@ -501,13 +454,9 @@ a { color: inherit; }
       try { localStorage.setItem('theme-v2', next); } catch (e) {}
     };
 
-    // ---- Subtle parallax for blobs ----
+    // ---- Scroll-linked rotation for [data-rot] elements ----
     let sY = 0, tk = false;
     function par() {
-      document.querySelectorAll('.blob').forEach((el, i) => {
-        const sp = (i+1) * 0.06;
-        el.style.transform = `translate3d(0, ${sY * sp * -0.4}px, 0)`;
-      });
       document.querySelectorAll('[data-rot]').forEach((el) => {
         const sp = parseFloat(el.dataset.rot || 0.04);
         el.style.transform = `rotate(${sY * sp}deg)`;
