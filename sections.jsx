@@ -1027,8 +1027,7 @@ function Projects() {
             <button
               key={i}
               onClick={() => setOpenIdx(i)}
-              className={`bento-card tilt-3d reveal ${a.span || ''}`}
-              data-tilt-max="6"
+              className={`bento-card ${a.span || ''}`}
               aria-label={`Open ${a.title}`}
             >
               <img src={a.src} alt={a.title} loading="lazy"
@@ -1804,73 +1803,97 @@ function Certifications() {
         }
         @keyframes certRise { to { opacity: 1; transform: translateY(0); } }
 
-        /* === Gold variant (BNSP) === */
+        /* === Gold variant (BNSP) — matches v2 ============================== */
         .cert-elite-gold {
-          background:
-            radial-gradient(ellipse 80% 60% at 0% 0%, color-mix(in oklch, var(--c-gold-tint) 45%, transparent), transparent 60%),
-            radial-gradient(ellipse 60% 60% at 100% 100%, color-mix(in oklch, var(--c-gold-tint2) 35%, transparent), transparent 60%),
-            linear-gradient(160deg, var(--c-gold-bg) 0%, var(--c-gold-bg2) 100%);
-          border-color: color-mix(in oklch, var(--c-gold-deep2) 30%, transparent);
+          background: linear-gradient(160deg, #faf2d9 0%, #f4e6b5 100%);
+          color: #2a1d05;
+          border-color: rgba(180,130,10,0.25);
           box-shadow:
-            0 1px 0 color-mix(in oklch, var(--c-gold) 15%, transparent) inset,
-            0 0 0 1px color-mix(in oklch, var(--c-gold-deep2) 8%, transparent) inset,
-            0 4px 12px var(--c-shadow-07),
-            0 32px 80px -20px oklch(0.40 0.14 75 / 0.4),
-            0 60px 120px -40px var(--c-shadow-10);
+            0 1px 2px rgba(0,0,0,0.04),
+            0 8px 24px -10px rgba(0,0,0,0.10);
+        }
+        [data-theme="dark"] .cert-elite-gold {
+          background: linear-gradient(160deg, #2e2410 0%, #1c1709 100%);
+          color: #f4ecd9;
+          border-color: rgba(236,195,79,0.30);
+          box-shadow:
+            0 1px 2px rgba(0,0,0,0.4),
+            0 8px 24px -10px rgba(0,0,0,0.5);
         }
         .cert-elite-gold .cert-elite-tier-dot,
         .cert-elite-gold .cert-elite-icon,
         .cert-elite-gold .cert-elite-score-value {
-          color: var(--c-gold);
+          color: #b88800;
+        }
+        [data-theme="dark"] .cert-elite-gold .cert-elite-tier-dot,
+        [data-theme="dark"] .cert-elite-gold .cert-elite-icon,
+        [data-theme="dark"] .cert-elite-gold .cert-elite-score-value {
+          color: #ecc34f;
         }
         .cert-elite-gold .cert-elite-icon {
-          background: color-mix(in oklch, var(--c-gold) 14%, transparent);
-          border-color: color-mix(in oklch, var(--c-gold) 30%, transparent);
+          background: rgba(180,130,10,0.14);
+          border-color: rgba(180,130,10,0.30);
+        }
+        [data-theme="dark"] .cert-elite-gold .cert-elite-icon {
+          background: rgba(236,195,79,0.12);
+          border-color: rgba(236,195,79,0.30);
         }
         .cert-elite-gold .cert-elite-score-value {
-          filter: drop-shadow(0 0 24px color-mix(in oklch, var(--c-gold) 40%, transparent));
+          filter: drop-shadow(0 0 24px rgba(184,136,0,0.35));
+        }
+        [data-theme="dark"] .cert-elite-gold .cert-elite-score-value {
+          filter: drop-shadow(0 0 24px rgba(236,195,79,0.40));
         }
         .cert-elite-gold:hover {
-          border-color: color-mix(in oklch, var(--c-gold-mid) 50%, transparent);
+          border-color: var(--accent);
           box-shadow:
-            0 1px 0 color-mix(in oklch, var(--c-gold) 20%, transparent) inset,
-            0 0 0 1px color-mix(in oklch, var(--c-gold-deep2) 12%, transparent) inset,
-            0 8px 24px var(--c-shadow-09),
-            0 40px 100px -20px color-mix(in oklch, var(--c-gold-deep) 50%, transparent),
-            0 80px 160px -40px var(--c-shadow-12),
-            0 0 60px -10px color-mix(in oklch, var(--c-gold) 40%, transparent);
+            0 1px 2px rgba(0,0,0,0.04),
+            0 20px 48px -16px rgba(0,0,0,0.18),
+            0 40px 80px -32px rgba(0,0,0,0.16);
+        }
+        [data-theme="dark"] .cert-elite-gold:hover {
+          box-shadow:
+            0 1px 2px rgba(0,0,0,0.4),
+            0 20px 48px -16px rgba(0,0,0,0.55),
+            0 40px 80px -32px rgba(0,0,0,0.55);
         }
         .cert-elite-gold .cert-elite-cta {
-          background: linear-gradient(180deg, var(--c-gold-light), var(--c-gold-mid2));
-          color: var(--c-gold-bg);
+          background: #b88800;
+          color: #faf2d9;
+        }
+        [data-theme="dark"] .cert-elite-gold .cert-elite-cta {
+          background: #ecc34f;
+          color: #1c1709;
         }
 
-        /* === Emerald variant (Pemagangan) === */
+        /* === Ink variant (Internship) — matches v2 ============================== */
         .cert-elite-emerald {
-          background:
-            radial-gradient(ellipse 80% 60% at 0% 0%, color-mix(in oklch, var(--c-gold-tint3) 55%, transparent), transparent 60%),
-            radial-gradient(ellipse 60% 60% at 100% 100%, color-mix(in oklch, var(--c-accent2-t) 40%, transparent), transparent 60%),
-            linear-gradient(160deg, var(--c-blue-tint) 0%, var(--c-panel) 100%);
-          border-color: color-mix(in oklch, var(--c-accent-7) 30%, transparent);
+          background: var(--c-panel);
+          border-color: var(--hairline-strong);
           box-shadow:
-            0 1px 0 color-mix(in oklch, var(--c-accent-3) 15%, transparent) inset,
-            0 0 0 1px color-mix(in oklch, var(--c-accent-7) 8%, transparent) inset,
-            0 4px 12px var(--c-shadow-07),
-            0 32px 80px -20px color-mix(in oklch, var(--c-accent-10) 40%, transparent),
-            0 60px 120px -40px var(--c-shadow-10);
+            0 1px 2px rgba(0,0,0,0.04),
+            0 8px 24px -10px rgba(0,0,0,0.10);
+        }
+        [data-theme="dark"] .cert-elite-emerald {
+          box-shadow:
+            0 1px 2px rgba(0,0,0,0.4),
+            0 8px 24px -10px rgba(0,0,0,0.5);
         }
         .cert-elite-emerald:hover {
-          border-color: color-mix(in oklch, var(--c-accent-5) 50%, transparent);
+          border-color: var(--accent);
           box-shadow:
-            0 1px 0 color-mix(in oklch, var(--c-accent-3) 20%, transparent) inset,
-            0 0 0 1px color-mix(in oklch, var(--c-accent-7) 12%, transparent) inset,
-            0 8px 24px var(--c-shadow-09),
-            0 40px 100px -20px var(--accent-glow),
-            0 80px 160px -40px var(--c-shadow-12),
-            0 0 60px -10px var(--accent-glow);
+            0 1px 2px rgba(0,0,0,0.04),
+            0 20px 48px -16px rgba(0,0,0,0.18),
+            0 40px 80px -32px rgba(0,0,0,0.16);
+        }
+        [data-theme="dark"] .cert-elite-emerald:hover {
+          box-shadow:
+            0 1px 2px rgba(0,0,0,0.4),
+            0 20px 48px -16px rgba(0,0,0,0.55),
+            0 40px 80px -32px rgba(0,0,0,0.55);
         }
 
-        .cert-elite:hover { transform: translateY(-6px); }
+        .cert-elite:hover { transform: translateY(-4px); }
 
         /* Holographic shine sweep */
         .cert-elite-shine {
