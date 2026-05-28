@@ -92,7 +92,7 @@ function Navbar() {
     <>
       <nav className="nav">
         <a href="#top" className="nav-brand">
-          <span className="nav-mark">M</span>
+          <span className="nav-mark">M<span className="acc">.</span></span>
           <span style={{ fontSize: 13 }}>Irfan Kautsar</span>
         </a>
         <div className="nav-links">

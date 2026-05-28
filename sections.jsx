@@ -50,14 +50,14 @@ function Navbar() {
   return (
     <>
       <nav style={navStyle}>
-        <a href="#top" style={{ display:'flex', alignItems:'center', gap: 10, textDecoration: 'none', color: 'var(--text)', fontWeight: 600, fontSize: 14, letterSpacing: '-0.01em' }}>
+        <a href="#top" style={{ display:'flex', alignItems:'center', gap: 10, textDecoration: 'none', color: 'var(--text)', fontWeight: 500, fontSize: 13, letterSpacing: '-0.01em' }}>
           <span style={{
-            width: 28, height: 28, borderRadius: 8,
-            background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--c-on-accent)', fontWeight: 800, fontSize: 12,
-            boxShadow: '0 0 16px var(--accent-glow)',
-          }}>M</span>
+            width: 30, height: 30, borderRadius: 8,
+            background: 'var(--text)', color: 'var(--bg)',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontWeight: 500, fontSize: 17,
+            letterSpacing: '-0.02em', lineHeight: 1,
+          }}>M<span style={{ color: 'var(--accent)', marginLeft: -1 }}>.</span></span>
           <span style={{ display: 'none' }} className="brand-name">Irfan Kautsar</span>
         </a>
         <div className="nav-links" style={{ display: 'flex', gap: 4 }}>
@@ -2389,11 +2389,12 @@ function Footer() {
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{
-            width: 22, height: 22, borderRadius: 6,
-            background: 'linear-gradient(135deg, var(--accent), var(--accent-2))',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--c-on-accent)', fontWeight: 800, fontSize: 10,
-          }}>M</span>
+            width: 24, height: 24, borderRadius: 6,
+            background: 'var(--text)', color: 'var(--bg)',
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontWeight: 500, fontSize: 14,
+            letterSpacing: '-0.02em', lineHeight: 1,
+          }}>M<span style={{ color: 'var(--accent)', marginLeft: -1 }}>.</span></span>
           <span style={{ fontSize: 13, color: 'var(--text-2)' }}>© 2025 Muhammad Irfan Kautsar — built with care.</span>
         </div>
         <div className="mono">portfolio · v1.0</div>

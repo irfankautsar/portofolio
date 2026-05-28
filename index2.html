@@ -210,9 +210,12 @@ section { padding: 140px 0; position: relative; z-index: 2; scroll-margin-top: 8
 .nav-mark {
   width: 28px; height: 28px; border-radius: 8px;
   background: var(--ink); color: var(--paper);
-  display: grid; place-items: center; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 16px;
+  line-height: 1;
   transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
 }
+.nav-mark .acc { color: var(--accent); margin-left: -1px; }
 .nav-brand:hover .nav-mark { transform: rotate(-10deg) scale(1.06); }
 .nav-links { display: flex; gap: 2px; }
 .nav-link {
@@ -396,19 +399,6 @@ a { color: inherit; }
 }
 [data-theme="dark"] .bubble { opacity: 0.42; mix-blend-mode: screen; }
 
-/* ===== Whoosh theme transition (View Transitions API) ===== */
-::view-transition-old(root),
-::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-::view-transition-old(root) { z-index: 1; }
-::view-transition-new(root) {
-  z-index: 2;
-  clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
-  animation: vtwoosh 0.65s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-@keyframes vtwoosh { to { clip-path: circle(160vmax at var(--vt-x, 50%) var(--vt-y, 50%)); } }
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-new(root), ::view-transition-old(root) { animation: none; }
-}
 </style>
 </head>
 <body>
@@ -475,20 +465,12 @@ a { color: inherit; }
       });
     });
 
-    // ---- Theme toggle with whoosh ----
-    window.toggleTheme = (e) => {
+    // ---- Theme toggle: instant flip ----
+    window.toggleTheme = () => {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const next = cur === 'light' ? 'dark' : 'light';
-      let cx = window.innerWidth - 60, cy = 40;
-      const btn = e?.currentTarget || document.querySelector('.theme-toggle');
-      if (btn) { const r = btn.getBoundingClientRect(); cx = r.left + r.width/2; cy = r.top + r.height/2; }
-      document.documentElement.style.setProperty('--vt-x', cx + 'px');
-      document.documentElement.style.setProperty('--vt-y', cy + 'px');
-      const apply = () => {
-        document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('theme-v2', next); } catch (er) {}
-      };
-      if (document.startViewTransition) document.startViewTransition(apply); else apply();
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme-v2', next); } catch (er) {}
     };
 
     // ---- Lenis smooth scroll (weighted, intentional) ----

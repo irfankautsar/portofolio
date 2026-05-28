@@ -530,19 +530,6 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
 }
 [data-theme="dark"] .bubble { opacity: 0.55; mix-blend-mode: screen; }
 
-/* ===== Whoosh theme transition (View Transitions API) ===== */
-::view-transition-old(root),
-::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-::view-transition-old(root) { z-index: 1; }
-::view-transition-new(root) {
-  z-index: 2;
-  clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
-  animation: vtwoosh 0.65s cubic-bezier(0.7, 0, 0.3, 1) forwards;
-}
-@keyframes vtwoosh { to { clip-path: circle(160vmax at var(--vt-x, 50%) var(--vt-y, 50%)); } }
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-new(root), ::view-transition-old(root) { animation: none; }
-}
 </style>
 </head>
 <body>
@@ -583,21 +570,13 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
   <script type="text/babel" src="app.jsx?v=2"></script>
 
   <script>
-    // ---- Theme toggle with whoosh ----
+    // ---- Theme toggle: instant flip ----
     const themeBtn = document.getElementById('theme-toggle');
-    themeBtn.addEventListener('click', (e) => {
+    themeBtn.addEventListener('click', () => {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const next = cur === 'light' ? 'dark' : 'light';
-      const r = themeBtn.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      document.documentElement.style.setProperty('--vt-x', cx + 'px');
-      document.documentElement.style.setProperty('--vt-y', cy + 'px');
-      const apply = () => {
-        document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('theme', next); } catch (er) {}
-      };
-      if (document.startViewTransition) document.startViewTransition(apply); else apply();
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (er) {}
     });
 
     // ---- Bubbly interactive background ----

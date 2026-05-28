@@ -1,17 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f0a060"/>
-      <stop offset="55%" stop-color="#d97744"/>
-      <stop offset="100%" stop-color="#b85a2e"/>
-    </linearGradient>
-    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#g)"/>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#s)"/>
-  <path d="M16 46 V20 L24 20 L32 34 L40 20 L48 20 V46 L42 46 V30 L34 44 L30 44 L22 30 V46 Z"
-        fill="#ffffff" stroke="#5a2810" stroke-width="0.6" stroke-linejoin="round"/>
+  <rect width="64" height="64" rx="14" fill="#1d1d1f"/>
+  <text x="32" y="42"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-style="italic"
+        font-weight="500"
+        font-size="22"
+        letter-spacing="0.4"
+        text-anchor="middle"
+        fill="#f5f5f7">M<tspan fill="#c8552a">.</tspan>I<tspan fill="#c8552a">.</tspan>K</text>
 </svg>
