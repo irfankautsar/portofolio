@@ -440,10 +440,21 @@ a { color: inherit; }
     }, { passive: true });
 
     // ---- Reveal observer ----
+    // .rev: toggles in/out as element enters/leaves viewport (repeats)
+    // .split + .hl: one-shot — fire once and stay drawn (character stagger
+    //               and stabillo would feel jittery if re-played)
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(e => {
+        const t = e.target;
+        if (t.classList.contains('rev')) {
+          t.classList.toggle('in', e.isIntersecting);
+        } else if (e.isIntersecting) {
+          t.classList.add('in');
+          io.unobserve(t);
+        }
+      });
     }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
-    const observeAll = () => document.querySelectorAll('.rev:not(.in), .split:not(.in), .hl:not(.in)').forEach(el => io.observe(el));
+    const observeAll = () => document.querySelectorAll('.rev, .split:not(.in), .hl:not(.in)').forEach(el => io.observe(el));
     observeAll();
     const mo = new MutationObserver(observeAll);
     mo.observe(document.getElementById('root'), { childList: true, subtree: true });

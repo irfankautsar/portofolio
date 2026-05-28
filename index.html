@@ -658,11 +658,21 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
     });
     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Reveal on scroll + stabillo draw-in
+    // Reveal on scroll (repeats) + stabillo draw-in (one-shot)
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+      entries.forEach(e => {
+        const t = e.target;
+        if (t.classList.contains('reveal')) {
+          // Toggle so animation replays when re-entering the viewport
+          t.classList.toggle('in', e.isIntersecting);
+        } else if (e.isIntersecting) {
+          // .hl stabillo: draw once, stay drawn
+          t.classList.add('in');
+          io.unobserve(t);
+        }
+      });
     }, { threshold: 0.12 });
-    const observeReveals = () => document.querySelectorAll('.reveal:not(.in), .hl:not(.in)').forEach(el => io.observe(el));
+    const observeReveals = () => document.querySelectorAll('.reveal, .hl:not(.in)').forEach(el => io.observe(el));
     const mo = new MutationObserver(observeReveals);
     mo.observe(document.getElementById('root'), { childList: true, subtree: true });
 
