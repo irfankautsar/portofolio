@@ -145,7 +145,7 @@ function Hero() {
             <h1 className="reveal" style={{ marginBottom: 24 }}>
               Muhammad
               <br/>
-              Irfan <span className="serif" style={{ color: 'var(--accent)' }}>Kautsar.</span>
+              Irfan <span className="serif hl">Kautsar.</span>
             </h1>
 
             <div className="reveal" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 14, marginBottom: 32, color: 'var(--text-2)', fontSize: 15 }}>
@@ -312,7 +312,7 @@ function About() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">01 — About</span>
-          <h2>A behind-the-scenes operator with a <span className="serif" style={{ color: 'var(--accent)' }}>people-first instinct.</span></h2>
+          <h2>A behind-the-scenes operator with a <span className="serif hl">people-first instinct.</span></h2>
           <p style={{ fontSize: 17, maxWidth: 680 }}>
             I learned business by studying it — and learned operations by doing it. My internship at a chemicals
             plant taught me that General Affairs and CSR aren't side functions; they're how a company shows up
@@ -389,7 +389,7 @@ function Experience() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">02 — Experience</span>
-          <h2>Where the <span className="serif" style={{ color: 'var(--accent)' }}>work</span> happened.</h2>
+          <h2>Where the <span className="serif hl">work</span> happened.</h2>
           <p style={{ fontSize: 17, maxWidth: 680 }}>
             A focused, real-world introduction to corporate operations and community work — close enough to the
             ground to learn how things actually get done.
@@ -489,7 +489,7 @@ function Skills() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">04 — Skills</span>
-          <h2>Core <span className="serif" style={{ color: 'var(--accent)' }}>competencies.</span></h2>
+          <h2>Core <span className="serif hl">competencies.</span></h2>
           <p style={{ fontSize: 17, maxWidth: 680 }}>
             Practical, people-centric capabilities sharpened in a real corporate environment — not a list of buzzwords.
           </p>
@@ -671,7 +671,7 @@ function FeaturedAfterMovie() {
           <div className="mono" style={{ color: 'var(--accent)' }}>Film · Documentary</div>
         </div>
         <h3 style={{ fontSize: 'clamp(28px, 3vw, 36px)', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.1 }}>
-          MCCI Trainee Program — <span className="serif" style={{ color: 'var(--accent)' }}>After Movie</span>
+          MCCI Trainee Program — <span className="serif hl">After Movie</span>
         </h3>
         <p style={{ fontSize: 15, margin: 0 }}>
           A short documentary film made by the MCCI trainee team to close out the program — capturing the people, the work, and the small moments that made the year meaningful. Shot on-site at PT Merak Chemicals Indonesia and edited entirely in-house by the interns.
@@ -918,7 +918,7 @@ function Projects() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">05 — Selected Work & Activities</span>
-          <h2>Real <span className="serif" style={{ color: 'var(--accent)' }}>work,</span> real impact.</h2>
+          <h2>Real <span className="serif hl">work,</span> real impact.</h2>
           <p style={{ fontSize: 17, maxWidth: 680 }}>
             A featured analytics project alongside a documented portfolio of CSR, community, and corporate-affairs activities from PT Merak Chemicals Indonesia.
           </p>
@@ -1658,7 +1658,7 @@ function Certifications() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">03 — Certifications</span>
-          <h2>Officially <span className="serif" style={{ color: 'var(--accent)' }}>certified.</span></h2>
+          <h2>Officially <span className="serif hl">certified.</span></h2>
           <p style={{ fontSize: 17, maxWidth: 680 }}>
             Government-issued credentials from BNSP and Kemnaker RI, essential-skills certifications from GNIK, and professional training programs from Universitas Gunadarma. Click any card to open the original PDF.
           </p>
@@ -2212,7 +2212,7 @@ function Education() {
       <div className="container">
         <div className="section-head reveal">
           <span className="mono">06 — Education</span>
-          <h2>Academic <span className="serif" style={{ color: 'var(--accent)' }}>foundation.</span></h2>
+          <h2>Academic <span className="serif hl">foundation.</span></h2>
         </div>
 
         <div className="edu-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 16 }}>
@@ -2324,7 +2324,7 @@ function Contact() {
           <div style={{ position: 'relative' }}>
             <span className="eyebrow" style={{ marginBottom: 24 }}><span className="dot"/>Let's connect</span>
             <h2 style={{ marginTop: 24, marginBottom: 20, fontSize: 'clamp(36px, 5vw, 64px)' }}>
-              Open to the <span className="serif" style={{ color: 'var(--accent)' }}>right opportunity.</span>
+              Open to the <span className="serif hl">right opportunity.</span>
             </h2>
             <p style={{ fontSize: 17, maxWidth: 580, margin: '0 auto 48px' }}>
               Currently exploring Management Trainee, CSR, and General Affairs roles across Indonesia.

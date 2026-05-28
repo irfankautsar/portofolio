@@ -68,7 +68,10 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased; transition: background-color 0.5s ease, color 0.5s ease; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 body { overflow-x: hidden; }
 ::selection { background: var(--accent); color: var(--on-accent); }
 
@@ -423,6 +426,7 @@ a { color: inherit; }
 
   <div id="root"></div>
 
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
@@ -487,6 +491,29 @@ a { color: inherit; }
       if (document.startViewTransition) document.startViewTransition(apply); else apply();
     };
 
+    // ---- Lenis smooth scroll (weighted, intentional) ----
+    let lenis = null;
+    if (window.Lenis) {
+      lenis = new Lenis({
+        duration: 1.05,
+        easing: (t) => 1 - Math.pow(1 - t, 3),
+        smoothWheel: true,
+        smoothTouch: false,
+        wheelMultiplier: 1.0,
+      });
+      function rafLenis(time) { lenis.raf(time); requestAnimationFrame(rafLenis); }
+      requestAnimationFrame(rafLenis);
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        const href = a.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+          const el = document.querySelector(href);
+          if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -16 }); }
+        }
+      });
+    }
+
     // ---- Bubbly interactive background ----
     (function bubbleBG() {
       const wrap = document.querySelector('.bubbles');
@@ -518,10 +545,19 @@ a { color: inherit; }
       let mx = -1e4, my = -1e4;
       window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
       window.addEventListener('mouseout',  () => { mx = -1e4; my = -1e4; });
+      let prevSY = window.scrollY, scrollV = 0;
+      window.addEventListener('scroll', () => {
+        const cur = window.scrollY;
+        scrollV += (cur - prevSY);
+        prevSY = cur;
+      }, { passive: true });
       function tick() {
         const W = window.innerWidth, H = window.innerHeight;
+        const kick = scrollV * 0.045;
+        scrollV *= 0.86;
         for (const b of bs) {
           b.x += b.vx; b.y += b.vy;
+          b.y -= kick * (0.6 + b.hue * 0.25);
           if (b.x < -b.s/2) b.x = W + b.s/2;
           if (b.x > W + b.s/2) b.x = -b.s/2;
           if (b.y < -b.s/2) b.y = H + b.s/2;
