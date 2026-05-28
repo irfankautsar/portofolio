@@ -143,45 +143,45 @@
 }
 
 [data-theme="dark"] {
-  --c-bg:            oklch(0.13 0.012 240);
-  --c-panel:         oklch(0.14 0.012 240);
-  --c-panel-2:       oklch(0.15 0.012 240);
-  --c-bg2:           oklch(0.16 0.012 240);
-  --c-surface-3:     oklch(0.18 0.012 240);
-  --c-surface-4:     oklch(0.20 0.012 240);
-  --c-surface-5:     oklch(0.22 0.012 240);
-  --c-surface-6:     oklch(0.24 0.012 240);
-  --c-surface-7:     oklch(0.26 0.014 240);
-  --c-blue-tint:     oklch(0.18 0.018 200);
-  --c-img-mount:     oklch(0.96 0.02 230);
-  --c-bg-card:       oklch(0.10 0.01 240);
-  --c-bg-deep:       oklch(0.08 0.01 240);
+  --c-bg:            oklch(0.08 0.008 25);
+  --c-panel:         oklch(0.10 0.010 25);
+  --c-panel-2:       oklch(0.12 0.012 25);
+  --c-bg2:           oklch(0.11 0.012 25);
+  --c-surface-3:     oklch(0.14 0.014 25);
+  --c-surface-4:     oklch(0.16 0.016 25);
+  --c-surface-5:     oklch(0.18 0.018 25);
+  --c-surface-6:     oklch(0.20 0.020 25);
+  --c-surface-7:     oklch(0.22 0.020 25);
+  --c-blue-tint:     oklch(0.16 0.040 25);
+  --c-img-mount:     oklch(0.94 0.02 25);
+  --c-bg-card:       oklch(0.09 0.010 25);
+  --c-bg-deep:       oklch(0.05 0.005 25);
 
-  --c-text:          oklch(0.97 0.005 240);
-  --c-text-2:        oklch(0.78 0.008 240);
-  --c-text-mid:      oklch(0.7 0.005 240);
-  --c-text-soft:     oklch(0.7 0.01 240);
-  --c-text-3:        oklch(0.55 0.01 240);
+  --c-text:          oklch(0.97 0.005 25);
+  --c-text-2:        oklch(0.80 0.010 25);
+  --c-text-mid:      oklch(0.72 0.010 25);
+  --c-text-soft:     oklch(0.68 0.012 25);
+  --c-text-3:        oklch(0.55 0.014 25);
 
-  --c-accent:        oklch(0.82 0.14 165);
-  --c-accent-deep:   oklch(0.70 0.14 165);
-  --c-accent-1:      oklch(0.88 0.14 165);
-  --c-accent-2t:     oklch(0.86 0.14 165);
-  --c-accent-3:      oklch(0.85 0.14 165);
-  --c-accent-4:      oklch(0.78 0.14 165);
-  --c-accent-5:      oklch(0.75 0.16 165);
-  --c-accent-6:      oklch(0.72 0.16 165);
-  --c-accent-7:      oklch(0.65 0.14 165);
-  --c-accent-8:      oklch(0.55 0.14 165);
-  --c-accent-9:      oklch(0.50 0.14 165);
-  --c-accent-10:     oklch(0.40 0.14 165);
+  --c-accent:        oklch(0.65 0.24 25);
+  --c-accent-deep:   oklch(0.52 0.22 25);
+  --c-accent-1:      oklch(0.72 0.22 25);
+  --c-accent-2t:     oklch(0.70 0.22 25);
+  --c-accent-3:      oklch(0.68 0.22 25);
+  --c-accent-4:      oklch(0.62 0.22 25);
+  --c-accent-5:      oklch(0.58 0.22 25);
+  --c-accent-6:      oklch(0.54 0.22 25);
+  --c-accent-7:      oklch(0.48 0.20 25);
+  --c-accent-8:      oklch(0.40 0.18 25);
+  --c-accent-9:      oklch(0.34 0.16 25);
+  --c-accent-10:     oklch(0.26 0.12 25);
 
-  --c-on-accent:     oklch(0.12 0.02 165);
+  --c-on-accent:     oklch(0.98 0.005 25);
 
-  --c-accent2:       oklch(0.72 0.12 200);
-  --c-accent2-1:     oklch(0.68 0.14 220);
-  --c-accent2-2:     oklch(0.72 0.12 280);
-  --c-accent2-t:     oklch(0.28 0.08 200);
+  --c-accent2:       oklch(0.72 0.18 350);
+  --c-accent2-1:     oklch(0.68 0.18 0);
+  --c-accent2-2:     oklch(0.74 0.16 340);
+  --c-accent2-t:     oklch(0.28 0.10 25);
 
   --c-gold:          oklch(0.85 0.16 78);
   --c-gold-mid:      oklch(0.75 0.16 78);
@@ -545,6 +545,29 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
 .hairline { height: 1px; background: var(--hairline); width: 100%; }
 
 #root { position: relative; z-index: 2; }
+
+/* ===== Bubbly interactive bg ===== */
+.bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bubble {
+  position: absolute; top: 0; left: 0;
+  border-radius: 50%; filter: blur(60px); opacity: 0.42;
+  will-change: transform; transition: opacity 0.6s ease;
+}
+[data-theme="dark"] .bubble { opacity: 0.55; mix-blend-mode: screen; }
+
+/* ===== Whoosh theme transition (View Transitions API) ===== */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) {
+  z-index: 2;
+  clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+  animation: vtwoosh 0.65s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+@keyframes vtwoosh { to { clip-path: circle(160vmax at var(--vt-x, 50%) var(--vt-y, 50%)); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root), ::view-transition-old(root) { animation: none; }
+}
 </style>
 </head>
 <body>
@@ -558,6 +581,7 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
   <div class="bg-sparkle s3"></div>
   <div class="bg-sparkle s4"></div>
   <div class="bg-sparkle s5"></div>
+  <div class="bubbles" aria-hidden="true"></div>
 
   <div id="splash">
     <div class="splash-logo">MIK · Portfolio</div>
@@ -593,14 +617,75 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
   <script type="text/babel" src="app.jsx?v=2"></script>
 
   <script>
-    // ---- Theme toggle: instant flip ----
+    // ---- Theme toggle with whoosh ----
     const themeBtn = document.getElementById('theme-toggle');
-    themeBtn.addEventListener('click', () => {
+    themeBtn.addEventListener('click', (e) => {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const next = cur === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
+      const r = themeBtn.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      document.documentElement.style.setProperty('--vt-x', cx + 'px');
+      document.documentElement.style.setProperty('--vt-y', cy + 'px');
+      const apply = () => {
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (er) {}
+      };
+      if (document.startViewTransition) document.startViewTransition(apply); else apply();
     });
+
+    // ---- Bubbly interactive background ----
+    (function bubbleBG() {
+      const wrap = document.querySelector('.bubbles');
+      if (!wrap) return;
+      const palettes = {
+        light: ['#ff8a4c', '#ffd166', '#7aa6ff', '#ff6b9d', '#c9b8ff'],
+        dark:  ['#ff3b30', '#ff8a00', '#ff5b9c', '#a020e8', '#3a7afe'],
+      };
+      const N = 7;
+      const bs = [];
+      for (let i = 0; i < N; i++) {
+        const el = document.createElement('div');
+        el.className = 'bubble';
+        const s = 260 + Math.random() * 320;
+        el.style.width = s + 'px'; el.style.height = s + 'px';
+        wrap.appendChild(el);
+        bs.push({
+          el, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+          s, hue: i % 5,
+        });
+      }
+      function recolor() {
+        const t = document.documentElement.getAttribute('data-theme') || 'light';
+        const cols = palettes[t] || palettes.light;
+        bs.forEach(b => { b.el.style.background = `radial-gradient(circle, ${cols[b.hue]} 0%, transparent 70%)`; });
+      }
+      recolor();
+      let mx = -1e4, my = -1e4;
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      window.addEventListener('mouseout',  () => { mx = -1e4; my = -1e4; });
+      function tick() {
+        const W = window.innerWidth, H = window.innerHeight;
+        for (const b of bs) {
+          b.x += b.vx; b.y += b.vy;
+          if (b.x < -b.s/2) b.x = W + b.s/2;
+          if (b.x > W + b.s/2) b.x = -b.s/2;
+          if (b.y < -b.s/2) b.y = H + b.s/2;
+          if (b.y > H + b.s/2) b.y = -b.s/2;
+          const dx = b.x - mx, dy = b.y - my, d = Math.hypot(dx, dy);
+          const R = 260;
+          if (d < R && d > 0) {
+            const f = (1 - d/R) * 3.2;
+            b.x += (dx/d) * f; b.y += (dy/d) * f;
+          }
+          b.el.style.transform = `translate3d(${b.x - b.s/2}px, ${b.y - b.s/2}px, 0)`;
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+      new MutationObserver(recolor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
 
     // Splash
     window.addEventListener('load', () => {

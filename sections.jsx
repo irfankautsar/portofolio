@@ -783,7 +783,7 @@ function Projects() {
       src: 'assets/activities/umkm-kegiatan.jpg',
       tag: 'UMKM · Training',
       title: 'Rumah Siap Kerja — Culinary Workshop',
-      year: '2024',
+      year: '2025',
       location: 'Klinik UMKM Diskop Cilegon',
       partners: ['Diskop Kota Cilegon', 'MCCI'],
       desc: 'Hands-on culinary workshop under the city\'s "Rumah Siap Kerja" program for UMKM (small enterprises) — kuliner, kerajinan, and marketing modules rolled into one. Participants working through a recipe with a pasta machine and dough, mentored by the program lead.',
@@ -793,7 +793,7 @@ function Projects() {
       src: 'assets/activities/umkm-produk.jpg',
       tag: 'UMKM · Graduation',
       title: 'UMKM Closing Ceremony',
-      year: '2024',
+      year: '2025',
       location: 'Klinik UMKM Diskop Cilegon',
       partners: ['Diskop Kota Cilegon', 'MCCI'],
       desc: 'Graduation day for the UMKM cohort — participants holding the finished yellow-packaged snack they produced and branded over the course of the program. A small product, but it represents real income and real confidence for these entrepreneurs.',
@@ -1069,7 +1069,7 @@ function Projects() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
 
-            <div className="lb-card" key={openIdx}>
+            <div className="lb-card">
               <div className="lb-image-wrap">
                 <img src={open.src} alt={open.title}/>
               </div>

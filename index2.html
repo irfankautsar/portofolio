@@ -383,9 +383,34 @@ section { padding: 140px 0; position: relative; z-index: 2; scroll-margin-top: 8
 .line { height: 1px; background: var(--rule); width: 100%; }
 .dimmer { color: var(--ink-3); }
 a { color: inherit; }
+
+/* ===== Bubbly interactive bg ===== */
+.bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bubble {
+  position: absolute; top: 0; left: 0;
+  border-radius: 50%; filter: blur(70px); opacity: 0.32;
+  will-change: transform; transition: opacity 0.6s ease;
+}
+[data-theme="dark"] .bubble { opacity: 0.42; mix-blend-mode: screen; }
+
+/* ===== Whoosh theme transition (View Transitions API) ===== */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) {
+  z-index: 2;
+  clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
+  animation: vtwoosh 0.65s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+@keyframes vtwoosh { to { clip-path: circle(160vmax at var(--vt-x, 50%) var(--vt-y, 50%)); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root), ::view-transition-old(root) { animation: none; }
+}
 </style>
 </head>
 <body>
+  <div class="bubbles" aria-hidden="true"></div>
+
   <div id="splash">
     <div class="splash-inner">
       <div class="splash-mark">M<span class="acc">.</span>I<span class="acc">.</span>K</div>
@@ -446,13 +471,74 @@ a { color: inherit; }
       });
     });
 
-    // ---- Theme toggle ----
-    window.toggleTheme = () => {
+    // ---- Theme toggle with whoosh ----
+    window.toggleTheme = (e) => {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const next = cur === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme-v2', next); } catch (e) {}
+      let cx = window.innerWidth - 60, cy = 40;
+      const btn = e?.currentTarget || document.querySelector('.theme-toggle');
+      if (btn) { const r = btn.getBoundingClientRect(); cx = r.left + r.width/2; cy = r.top + r.height/2; }
+      document.documentElement.style.setProperty('--vt-x', cx + 'px');
+      document.documentElement.style.setProperty('--vt-y', cy + 'px');
+      const apply = () => {
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme-v2', next); } catch (er) {}
+      };
+      if (document.startViewTransition) document.startViewTransition(apply); else apply();
     };
+
+    // ---- Bubbly interactive background ----
+    (function bubbleBG() {
+      const wrap = document.querySelector('.bubbles');
+      if (!wrap) return;
+      const palettes = {
+        light: ['#ff9966', '#ffd28a', '#a4c4ff', '#ffb3c6', '#c9b8ff'],
+        dark:  ['#ff7a45', '#ffb454', '#3a7afe', '#ff5b9c', '#a070ff'],
+      };
+      const N = 7;
+      const bs = [];
+      for (let i = 0; i < N; i++) {
+        const el = document.createElement('div');
+        el.className = 'bubble';
+        const s = 280 + Math.random() * 340;
+        el.style.width = s + 'px'; el.style.height = s + 'px';
+        wrap.appendChild(el);
+        bs.push({
+          el, x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+          s, hue: i % 5,
+        });
+      }
+      function recolor() {
+        const t = document.documentElement.getAttribute('data-theme') || 'light';
+        const cols = palettes[t] || palettes.light;
+        bs.forEach(b => { b.el.style.background = `radial-gradient(circle, ${cols[b.hue]} 0%, transparent 70%)`; });
+      }
+      recolor();
+      let mx = -1e4, my = -1e4;
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      window.addEventListener('mouseout',  () => { mx = -1e4; my = -1e4; });
+      function tick() {
+        const W = window.innerWidth, H = window.innerHeight;
+        for (const b of bs) {
+          b.x += b.vx; b.y += b.vy;
+          if (b.x < -b.s/2) b.x = W + b.s/2;
+          if (b.x > W + b.s/2) b.x = -b.s/2;
+          if (b.y < -b.s/2) b.y = H + b.s/2;
+          if (b.y > H + b.s/2) b.y = -b.s/2;
+          const dx = b.x - mx, dy = b.y - my, d = Math.hypot(dx, dy);
+          const R = 260;
+          if (d < R && d > 0) {
+            const f = (1 - d/R) * 3.2;
+            b.x += (dx/d) * f; b.y += (dy/d) * f;
+          }
+          b.el.style.transform = `translate3d(${b.x - b.s/2}px, ${b.y - b.s/2}px, 0)`;
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+      new MutationObserver(recolor).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
 
     // ---- Scroll-linked rotation for [data-rot] elements ----
     let sY = 0, tk = false;

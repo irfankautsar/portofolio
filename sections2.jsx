@@ -100,7 +100,7 @@ function Navbar() {
             <a key={n.id} href={`#${n.id}`} className={`nav-link ${active === n.id ? 'active' : ''}`}>{n.label}</a>
           ))}
         </div>
-        <button className="theme-toggle" onClick={() => window.toggleTheme()} aria-label="Toggle theme" title="Toggle theme">
+        <button className="theme-toggle" onClick={(e) => window.toggleTheme(e)} aria-label="Toggle theme" title="Toggle theme">
           <span className="tt-pill">
             <span className="tt-icon tt-sun" aria-hidden="true"><Icon name="sun" size={12} stroke={2.2}/></span>
             <span className="tt-icon tt-moon" aria-hidden="true"><Icon name="moon" size={12} stroke={2.2}/></span>
@@ -688,8 +688,8 @@ const ACTIVITIES = [
   { src: 'assets/activities/kacang-umpet.jpg', tag: 'UMKM · Branding', title: 'Kacang Umpet — Product Poster', year: '2025', location: 'Gemara, Cilegon Banten', partners: ['UMKM Gemara', 'MCCI', 'BPOM Halal'], desc: 'Promotional poster for "Kacang Umpet", a 150g traditional snack from an MCCI-mentored UMKM. The label carries the MCCI sponsorship mark and Indonesian Halal certification.', role: 'Helped coordinate visual direction, sponsor placement, and Halal-mark compliance.', span: 'tall' },
   { src: 'assets/activities/saung-aksara.jpg', tag: 'CSR · Literacy', title: 'Saung Aksara — Reading Room', year: '2025', location: 'Village near Cilegon', partners: ['Local volunteers', 'MCCI CSR'], desc: 'A village reading room funded by MCCI\'s Saung Aksara program — children with hands raised and shelves stacked with donated books. The closest thing to a library for many of the kids here.', role: 'Logistics support during the launch and follow-up documentation for the CSR report.' },
   { src: 'assets/activities/ayam-petelur.jpg', tag: 'CSR · Livelihood', title: 'Ayam Petelur — Layer Hen Farm', year: '2026', location: 'Community farm, Banten', partners: ['Local farmer co-op', 'MCCI CSR'], desc: 'Inside the community-run layer hen barn supported by MCCI — neat rows of cages and a small whiteboard tracking production. A sustainable-livelihood program designed for ongoing income.', role: 'Field visit to verify progress, photograph the operation, and write the monthly progress note.' },
-  { src: 'assets/activities/umkm-kegiatan.jpg', tag: 'UMKM · Training', title: 'Rumah Siap Kerja — Culinary Workshop', year: '2024', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Hands-on culinary workshop under the city\'s "Rumah Siap Kerja" program — kuliner, kerajinan, and marketing modules rolled into one.', role: 'On-site documentation; wrote the recap shared with Diskop Cilegon and MCCI management.' },
-  { src: 'assets/activities/umkm-produk.jpg', tag: 'UMKM · Graduation', title: 'UMKM Closing Ceremony', year: '2024', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Graduation day for the UMKM cohort — participants holding the finished yellow-packaged snack they produced and branded over the program.', role: 'Coordinated the closing event and captured the cohort portrait for the program report.' },
+  { src: 'assets/activities/umkm-kegiatan.jpg', tag: 'UMKM · Training', title: 'Rumah Siap Kerja — Culinary Workshop', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Hands-on culinary workshop under the city\'s "Rumah Siap Kerja" program — kuliner, kerajinan, and marketing modules rolled into one.', role: 'On-site documentation; wrote the recap shared with Diskop Cilegon and MCCI management.' },
+  { src: 'assets/activities/umkm-produk.jpg', tag: 'UMKM · Graduation', title: 'UMKM Closing Ceremony', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Graduation day for the UMKM cohort — participants holding the finished yellow-packaged snack they produced and branded over the program.', role: 'Coordinated the closing event and captured the cohort portrait for the program report.' },
   { src: 'assets/activities/kebun-gizi.jpg', tag: 'CSR · UMKM', title: 'UMKM Producer — Kebun Gizi', year: '2025', location: 'Village UMKM site, Banten', partners: ['Village producer', 'MCCI'], desc: 'A UMKM producer holding the finished "Kacang Umpet" retail pack at her village home, the Kebun Gizi nutrition garden plots visible behind her.', role: 'Field visit and producer interview; photo used in the social-media and report rollout.' },
   { src: 'assets/activities/nelayan.jpg', tag: 'CSR · Fisheries', title: 'CSR MCCI × KKP — Fisheries Support', year: '2025', location: 'Coastal community, Banten', partners: ['KKP', 'MCCI'], desc: 'An officer from KKP and an MCCI representative present the "CSR MCCI Support Fisheries with KKP" sign — water-storage drums ready for handover to the local fishing community.', role: 'Coordinated logistics with the KKP focal point and documented the handover.' },
   { src: 'assets/activities/nelayan-kkp.jpg', tag: 'CSR · Ramadhan', title: 'Donasi Ramadhan & Idul Fitri 1447H', year: '2026', location: 'Fishing community, Banten', partners: ['Local fisherman community', 'MCCI'], desc: 'Handover photo with members of a coastal community — MCCI placard, packed white sembako bags lined up at their feet, ready for distribution.', role: 'Part of the on-site MCCI team — handover, distribution flow, and documentation.' },
@@ -752,7 +752,7 @@ function Activities() {
           <button className="lb-next" onClick={() => setIdx((idx + 1) % ACTIVITIES.length)} aria-label="Next">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
-          <div className="lb-card" key={idx}>
+          <div className="lb-card">
             <div className="lb-img"><img src={open.src} alt={open.title}/></div>
             <div className="lb-body">
               <div className="lb-tag"><span className="dot"/>{open.tag}</div>
@@ -815,8 +815,9 @@ function Activities() {
         @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
         .lb-card { width: 100%; max-width: 1180px; max-height: calc(100vh - 64px); background: var(--paper-2); border: 1px solid var(--rule-2); border-radius: 22px; overflow: hidden;
           display: grid; grid-template-columns: 1.2fr 1fr; box-shadow: 0 60px 120px -40px rgba(0,0,0,0.5);
-          animation: lbPop 0.55s cubic-bezier(0.34,1.56,0.64,1) both; }
-        @keyframes lbPop { 0% { opacity: 0; transform: scale(0.92) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+          animation: lbPop 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes lbPop { 0% { opacity: 0; transform: scale(0.96) translateY(12px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        .lb-card img, .lb-body { transition: opacity 0.25s ease; }
         .lb-img { position: relative; background: var(--paper-3); display: grid; place-items: center; min-height: 320px; }
         .lb-img img { width: 100%; height: 100%; object-fit: contain; max-height: calc(100vh - 64px); }
         .lb-body { padding: 40px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
