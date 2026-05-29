@@ -272,12 +272,6 @@ function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Scroll hint */}
-        <div className="reveal" style={{ marginTop: 80, display: 'flex', alignItems: 'center', gap: 12, color: 'var(--text-3)' }}>
-          <div style={{ width: 24, height: 1, background: 'var(--text-3)' }}/>
-          <span className="mono">Scroll to explore</span>
-        </div>
       </div>
 
       <style>{`
