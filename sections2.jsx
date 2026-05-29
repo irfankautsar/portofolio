@@ -198,24 +198,36 @@ function Hero() {
               style={{ transform: `perspective(1400px) rotateY(${mouse.x * 0.35}deg) rotateX(${-mouse.y * 0.35}deg)` }}>
               <div className="photo-tape t1"/>
               <div className="photo-tape t2"/>
-              <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar"/>
-              <div className="photo-meta">
-                <span className="mono">Jakarta · 2025</span>
+              <div className="photo-inner">
+                <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar"/>
+                <div className="photo-shade"/>
+                <div className="photo-top">
+                  <span className="photo-tag mono">Jakarta · 2025</span>
+                  <span className="photo-live"/>
+                </div>
+                <div className="photo-cap">
+                  <div className="mono">Cilegon, Banten · ID</div>
+                  <div className="photo-quote">“Quietly reliable.”</div>
+                </div>
               </div>
             </div>
 
-            {/* Floating stamp — rotates with scroll */}
-            <div className="stamp" data-rot="0.06">
-              <svg viewBox="0 0 120 120" width="120" height="120">
-                <defs>
-                  <path id="circ" d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"/>
-                </defs>
-                <text fontFamily="JetBrains Mono" fontSize="9.5" letterSpacing="2.6" fill="currentColor">
-                  <textPath href="#circ" startOffset="0">PORTFOLIO · 2026 · IRFAN KAUTSAR · </textPath>
-                </text>
-                <circle cx="60" cy="60" r="20" fill="none" stroke="currentColor" strokeWidth="1"/>
-                <text x="60" y="64" textAnchor="middle" fontFamily="Fraunces" fontStyle="italic" fontSize="18" fill="currentColor">m.</text>
-              </svg>
+            {/* Floating chips */}
+            <div className="fchip fchip-1"
+              style={{ transform: `translate(${mouse.x * 1.1}px, ${mouse.y * 1.1}px)` }}>
+              <div className="fchip-ico"><Icon name="users" size={16}/></div>
+              <div>
+                <div className="mono">Focus</div>
+                <div className="fchip-val">Operations & People</div>
+              </div>
+            </div>
+            <div className="fchip fchip-2"
+              style={{ transform: `translate(${-mouse.x * 1.3}px, ${-mouse.y * 1.3}px)` }}>
+              <div className="fchip-ico"><Icon name="graduation" size={16}/></div>
+              <div>
+                <div className="mono">Degree</div>
+                <div className="fchip-val">S.E., Gunadarma</div>
+              </div>
             </div>
           </div>
         </div>
@@ -250,19 +262,27 @@ function Hero() {
         .hero-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
         .hero-meta-val { font-size: 14px; color: var(--ink); font-weight: 500; margin-top: 4px; }
 
-        .hero-photo { position: relative; padding: 0 20px; transform-style: preserve-3d; }
+        .hero-photo { position: relative; padding: 0 28px; transform-style: preserve-3d; }
         .photo-frame {
           position: relative; aspect-ratio: 4/5;
-          background: var(--paper-3); padding: 16px 16px 56px;
+          background: var(--paper-3); padding: 14px;
           box-shadow: var(--shadow-2);
           transform-origin: center;
           transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-          border-radius: 4px;
+          border-radius: 6px;
         }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; display: block; filter: saturate(0.95) contrast(1.02); }
-        .photo-meta { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: var(--ink-3); }
+        .photo-inner { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 3px; }
+        .photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; display: block; filter: saturate(0.95) contrast(1.02); }
+        .photo-shade { position: absolute; inset: 0; pointer-events: none;
+          background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, transparent 24%, transparent 50%, rgba(0,0,0,0.64) 100%); }
+        .photo-top { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .photo-tag { background: rgba(0,0,0,0.42); color: #fff; padding: 6px 10px; border-radius: 7px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        .photo-live { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+        .photo-cap { position: absolute; left: 18px; right: 18px; bottom: 18px; color: #fff; }
+        .photo-cap .mono { color: rgba(255,255,255,0.74); margin-bottom: 6px; }
+        .photo-quote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 22px; letter-spacing: -0.01em; color: #fff; line-height: 1.1; }
         .photo-tape {
-          position: absolute; width: 84px; height: 22px;
+          position: absolute; width: 84px; height: 22px; z-index: 4;
           background: rgba(236,195,79,0.6);
           backdrop-filter: blur(2px);
           box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -271,9 +291,29 @@ function Hero() {
         .photo-tape.t2 { top: -10px; right: 22%; transform: rotate(8deg); }
         [data-theme="dark"] .photo-tape { background: rgba(232,121,74,0.4); }
 
-        .stamp { position: absolute; right: -10px; bottom: 90px;
-          width: 120px; height: 120px; color: var(--accent);
-          opacity: 0.85; pointer-events: none;
+        /* Floating chips */
+        .fchip {
+          position: absolute; z-index: 5;
+          display: flex; align-items: center; gap: 10px;
+          padding: 12px 16px; border-radius: 16px;
+          background: color-mix(in oklab, var(--paper-2) 88%, transparent);
+          border: 1px solid var(--rule-2);
+          box-shadow: var(--shadow-2);
+          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+        }
+        .fchip-1 { top: -18px; left: -26px; }
+        .fchip-2 { bottom: 44px; right: -34px; }
+        .fchip-ico { width: 32px; height: 32px; border-radius: 9px; background: var(--accent-soft); border: 1px solid var(--accent); display: grid; place-items: center; color: var(--accent); flex-shrink: 0; }
+        .fchip-val { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+        @media (max-width: 900px) {
+          .fchip-1 { top: -12px; left: -6px; }
+          .fchip-2 { bottom: 28px; right: -6px; }
+        }
+        @media (max-width: 420px) {
+          .fchip { padding: 10px 12px; }
+          .fchip-1 { left: 0; }
+          .fchip-2 { right: 0; }
         }
 
         .stats-row {

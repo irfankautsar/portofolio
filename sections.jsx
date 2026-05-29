@@ -209,7 +209,7 @@ function Hero() {
                 position: 'absolute', top: 16, left: 16, right: 16,
                 display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
               }}>
-                <div className="mono" style={{ background: 'var(--c-shadow-09)', padding: '6px 10px', borderRadius: 6, backdropFilter: 'blur(8px)', color: 'var(--text-2)' }}>// graduation · 2025</div>
+                <div className="mono" style={{ background: 'var(--c-shadow-09)', padding: '6px 10px', borderRadius: 6, backdropFilter: 'blur(8px)', color: 'var(--text-2)' }}>// Jakarta · 2025</div>
                 <div style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 12px var(--accent-glow)' }}/>
               </div>
               <div style={{
