@@ -179,7 +179,7 @@ function Hero() {
             </div>
 
             <p className="rev" data-delay="3" style={{ fontSize: 18, maxWidth: 560, marginTop: 36, lineHeight: 1.6 }}>
-              Management graduate with hands-on experience in <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>CSR & General Affairs at PT Merak Chemicals Indonesia</strong> — coordinated community programs across literacy, nutrition and UMKM, built the team's first Instagram analytics dashboard in Power BI, and earned BNSP Marketing certification.
+              Management graduate with hands-on experience in <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>CSR & General Affairs at PT Merak Chemicals Indonesia</strong> — coordinated community programs across literacy, nutrition and UMKM, built the team's first Instagram analytics dashboard in Power BI, and earned BNSP Marketing certification. Open to opportunities where strong execution, clear communication, and people-first thinking make an impact.
             </p>
 
             <div className="rev" data-delay="4" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 36 }}>
@@ -226,7 +226,6 @@ function Hero() {
             { k: 10, suf: '+', l: 'Programs documented' },
             { k: 16, suf: '',  l: 'Certifications earned' },
             { k: 8,  suf: '',  l: 'Core competencies' },
-            { k: 6,  suf: 'mo', l: 'Internship · MCCI' },
           ].map((s, i) => (
             <div key={i} className="stat">
               <div className="stat-num">
@@ -260,7 +259,7 @@ function Hero() {
           transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
           border-radius: 4px;
         }
-        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 28%; display: block; filter: saturate(0.94) contrast(1.02); }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; display: block; filter: saturate(0.95) contrast(1.02); }
         .photo-meta { position: absolute; bottom: 16px; left: 0; right: 0; text-align: center; color: var(--ink-3); }
         .photo-tape {
           position: absolute; width: 84px; height: 22px;
@@ -278,7 +277,7 @@ function Hero() {
         }
 
         .stats-row {
-          display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+          display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
           margin-top: 80px; padding-top: 28px;
           border-top: 1px solid var(--rule);
         }
@@ -306,7 +305,8 @@ function Hero() {
           .hero-meta-grid { grid-template-columns: 1fr 1fr; }
           .stats-row { grid-template-columns: 1fr 1fr; gap: 22px; padding-top: 22px; }
           .stat:nth-child(2n) { border-right: none; }
-          .stat:nth-child(-n+2) { padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
+          .stat:nth-child(-n+1) { padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
+          .stat:nth-child(2) { padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
         }
       `}</style>
     </section>
@@ -845,12 +845,18 @@ function Activities() {
           .lb-img { min-height: 260px; max-height: 40vh; }
         }
         @media (max-width: 720px) {
-          .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
-          .bento-cell.wide { grid-column: span 2; }
-          .bento-cell.tall { grid-row: span 2; }
+          /* Uniform 2-col grid — dense wide/tall spans leave holes on phones */
+          .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+          .bento-cell.wide, .bento-cell.tall { grid-column: auto; grid-row: auto; }
           .bento-zoom { opacity: 1; transform: scale(1); }
           .lb { padding: 0; }
-          .lb-card { border-radius: 0; max-width: 100%; max-height: 100vh; height: 100vh; }
+          .lb-card {
+            display: block; border-radius: 0; max-width: 100%; width: 100%;
+            height: 100dvh; max-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+          }
+          .lb-img { min-height: 0; height: 42dvh; max-height: 42dvh; }
+          .lb-img img { max-height: 42dvh; }
+          .lb-body { padding: 24px; }
         }
       `}</style>
     </>
@@ -1043,7 +1049,9 @@ function Certifications() {
           transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, color 0.3s ease;
         }
         [data-theme="dark"] .cert-feat-arrow { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
-        .cert-feat-card:hover .cert-feat-arrow { transform: rotate(-30deg); background: currentColor; color: var(--paper); }
+        .cert-feat-card:hover .cert-feat-arrow { transform: rotate(-30deg); background: var(--ink); color: var(--paper); }
+        .cert-feat-card.gold:hover .cert-feat-arrow { background: #2a1d05; color: #faf2d9; }
+        [data-theme="dark"] .cert-feat-card.gold:hover .cert-feat-arrow { background: #ecc34f; color: #1c1709; }
         .cert-feat-title-wrap { display: flex; flex-direction: column; gap: 6px; }
         .cert-feat-sub { font-size: 13px; color: var(--ink-3); }
         .cert-feat-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(32px, 4vw, 50px); line-height: 0.95; letter-spacing: -0.035em; }

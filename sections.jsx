@@ -1510,12 +1510,18 @@ function Projects() {
           .lb-close { top: 12px; right: 12px; }
         }
         @media (max-width: 720px) {
-          .bento-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
-          .bento-card.wide { grid-column: span 2; }
-          .bento-card.tall { grid-row: span 2; }
+          /* Uniform 2-col grid — dense wide/tall spans leave holes on phones */
+          .bento-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+          .bento-card.wide, .bento-card.tall { grid-column: auto; grid-row: auto; }
           .bento-zoom { opacity: 1; transform: scale(1); }
           .lightbox { padding: 0; }
-          .lb-card { border-radius: 0; max-width: 100%; max-height: 100vh; height: 100vh; }
+          .lb-card {
+            display: block; border-radius: 0; max-width: 100%; width: 100%;
+            height: 100dvh; max-height: 100dvh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+          }
+          .lb-image-wrap { min-height: 0; height: 42dvh; max-height: 42dvh; }
+          .lb-image-wrap img { max-height: 42dvh; }
+          .lb-body { padding: 24px; }
         }
       `}</style>
     </section>
@@ -1813,8 +1819,10 @@ function Certifications() {
           transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, color 0.3s ease;
         }
         [data-theme="dark"] .cert-feat-arrow { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
-        .cert-feat-card:hover .cert-feat-arrow { transform: rotate(-30deg); background: currentColor; color: #f5f5f7; }
-        [data-theme="dark"] .cert-feat-card:hover .cert-feat-arrow { color: #000; }
+        .cert-feat-card:hover .cert-feat-arrow { transform: rotate(-30deg); background: #1d1d1f; color: #f5f5f7; }
+        [data-theme="dark"] .cert-feat-card:hover .cert-feat-arrow { background: #f5f5f7; color: #000; }
+        .cert-feat-card.gold:hover .cert-feat-arrow { background: #2a1d05; color: #faf2d9; }
+        [data-theme="dark"] .cert-feat-card.gold:hover .cert-feat-arrow { background: #ecc34f; color: #1c1709; }
         .cert-feat-title-wrap { display: flex; flex-direction: column; gap: 6px; }
         .cert-feat-sub { font-size: 13px; color: #6e6e73; }
         [data-theme="dark"] .cert-feat-sub { color: #86868b; }
