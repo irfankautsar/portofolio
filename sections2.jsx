@@ -120,20 +120,123 @@ function Navbar() {
   );
 }
 
+/* ---------- HERO PORTRAIT — interactive 3D card (themed) ---------- */
+function HeroPortrait() {
+  const wrapRef = React.useRef(null);
+  const [t, setT] = React.useState({ x: 0, y: 0, gx: 50, gy: 30, active: false });
+
+  const onMove = React.useCallback((e) => {
+    const el = wrapRef.current; if (!el) return;
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    setT({ x: (px - 0.5) * 2, y: (py - 0.5) * 2, gx: px * 100, gy: py * 100, active: true });
+  }, []);
+  const onLeave = React.useCallback(() => setT({ x: 0, y: 0, gx: 50, gy: 30, active: false }), []);
+  const MAX = 9;
+
+  return (
+    <div ref={wrapRef} className="hp-root" onMouseMove={onMove} onMouseLeave={onLeave}
+      style={{ '--gx': `${t.gx}%`, '--gy': `${t.gy}%` }}>
+      <div className="hp-card"
+        style={{ transform: `rotateY(${t.x * MAX}deg) rotateX(${-t.y * MAX}deg) translateZ(0) scale(${t.active ? 1.02 : 1})` }}>
+        <img className="hp-img" src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar" draggable="false"/>
+        <div className="hp-wash"/>
+        <div className="hp-glare"/>
+        <div className="hp-top">
+          <span className="mono hp-tag">// Jakarta · 2025</span>
+          <span className="hp-pulse"/>
+        </div>
+        <div className="hp-bottom">
+          <div className="mono">// Cilegon, Banten · ID</div>
+          <div className="hp-quote serif">“Quietly reliable.”</div>
+        </div>
+      </div>
+
+      <div className="hp-chip hp-chip-tl"
+        style={{ transform: `translate3d(${t.x * 14}px, ${t.y * 14}px, 80px)` }}>
+        <span className="hp-chip-ico"><Icon name="users" size={16}/></span>
+        <span>
+          <span className="mono hp-chip-label">Focus</span>
+          <span className="hp-chip-val">Operations & People</span>
+        </span>
+      </div>
+      <div className="hp-chip hp-chip-br"
+        style={{ transform: `translate3d(${-t.x * 16}px, ${-t.y * 16}px, 100px)` }}>
+        <span className="hp-chip-ico"><Icon name="graduation" size={16}/></span>
+        <span>
+          <span className="mono hp-chip-label">Degree</span>
+          <span className="hp-chip-val">S.E., Gunadarma</span>
+        </span>
+      </div>
+
+      <style>{`
+        .hp-root {
+          position: relative; width: 100%; max-width: 420px; margin: 0 auto;
+          aspect-ratio: 4/5; perspective: 1400px;
+        }
+        .hp-card {
+          position: absolute; inset: 0; border-radius: 24px; overflow: hidden;
+          transform-style: preserve-3d;
+          transition: transform 0.18s cubic-bezier(0.2,0.8,0.2,1);
+          border: 1px solid var(--rule-2);
+          box-shadow: var(--shadow-2), 0 0 80px -30px var(--accent-glow);
+          background: var(--paper-2);
+        }
+        .hp-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; filter: saturate(0.95) contrast(1.02); user-select: none; }
+        .hp-wash { position: absolute; inset: 0; pointer-events: none;
+          background: linear-gradient(180deg, rgba(0,0,0,0.28) 0%, transparent 26%, transparent 52%, color-mix(in oklab, var(--paper) 92%, transparent) 100%); }
+        .hp-glare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: soft-light;
+          background: radial-gradient(circle at var(--gx) var(--gy), rgba(255,255,255,0.38), rgba(255,255,255,0) 45%);
+          transition: background 0.12s linear; }
+        .hp-top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; }
+        .hp-tag { background: rgba(0,0,0,0.45); color: #f3ece2; padding: 6px 10px; border-radius: 7px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+        .hp-pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); animation: hpPulse 2s ease-in-out infinite; }
+        @keyframes hpPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+        .hp-bottom { position: absolute; bottom: 22px; left: 22px; right: 22px; z-index: 2; }
+        .hp-bottom .mono { color: var(--ink-3); }
+        .hp-quote { font-size: 23px; font-weight: 300; letter-spacing: -0.01em; color: var(--ink); margin-top: 6px; line-height: 1.1; }
+        .hp-chip {
+          position: absolute; z-index: 5; padding: 13px 17px; border-radius: 16px;
+          display: flex; align-items: center; gap: 10px;
+          background: color-mix(in oklab, var(--paper-2) 88%, transparent);
+          border: 1px solid var(--rule-2);
+          backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+          box-shadow: var(--shadow-2);
+          transition: transform 0.22s cubic-bezier(0.2,0.8,0.2,1);
+          transform-style: preserve-3d;
+        }
+        .hp-chip-tl { top: -22px; left: -30px; }
+        .hp-chip-br { bottom: 30px; right: -38px; }
+        .hp-chip-ico { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; flex-shrink: 0;
+          background: var(--accent-soft); border: 1px solid var(--accent); color: var(--accent); }
+        .hp-chip-label { display: block; color: var(--ink-3); }
+        .hp-chip-val { display: block; font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
+        @media (max-width: 900px) {
+          .hp-chip-tl { top: -14px; left: -8px; }
+          .hp-chip-br { bottom: 22px; right: -8px; }
+        }
+        @media (max-width: 420px) {
+          .hp-chip { padding: 10px 13px; }
+          .hp-chip-tl { left: 0; }
+          .hp-chip-br { right: 0; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 /* ---------- HERO ---------- */
 function Hero() {
-  const [mouse, setMouse] = React.useState({ x: 0, y: 0 });
   const [now, setNow] = React.useState('');
   React.useEffect(() => {
-    const onMove = (e) => setMouse({ x: (e.clientX / window.innerWidth - 0.5) * 22, y: (e.clientY / window.innerHeight - 0.5) * 22 });
-    window.addEventListener('mousemove', onMove);
     const updateTime = () => {
       const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
       setNow(d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     };
     updateTime();
     const i = setInterval(updateTime, 1000);
-    return () => { window.removeEventListener('mousemove', onMove); clearInterval(i); };
+    return () => clearInterval(i);
   }, []);
 
   return (
@@ -192,41 +295,9 @@ function Hero() {
             </div>
           </div>
 
-          {/* Portrait column — magazine-style frame */}
+          {/* Portrait column — interactive 3D card */}
           <div className="hero-photo">
-            <div className="photo-frame"
-              style={{ transform: `perspective(1400px) rotateY(${mouse.x * 0.35}deg) rotateX(${-mouse.y * 0.35}deg)` }}>
-              <div className="photo-inner">
-                <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar"/>
-                <div className="photo-shade"/>
-                <div className="photo-top">
-                  <span className="photo-tag mono">Jakarta · 2025</span>
-                  <span className="photo-live"/>
-                </div>
-                <div className="photo-cap">
-                  <div className="mono">Cilegon, Banten · ID</div>
-                  <div className="photo-quote">“Quietly reliable.”</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating chips */}
-            <div className="fchip fchip-1"
-              style={{ transform: `translate(${mouse.x * 1.1}px, ${mouse.y * 1.1}px)` }}>
-              <div className="fchip-ico"><Icon name="users" size={16}/></div>
-              <div>
-                <div className="mono">Focus</div>
-                <div className="fchip-val">Operations & People</div>
-              </div>
-            </div>
-            <div className="fchip fchip-2"
-              style={{ transform: `translate(${-mouse.x * 1.3}px, ${-mouse.y * 1.3}px)` }}>
-              <div className="fchip-ico"><Icon name="graduation" size={16}/></div>
-              <div>
-                <div className="mono">Degree</div>
-                <div className="fchip-val">S.E., Gunadarma</div>
-              </div>
-            </div>
+            <HeroPortrait/>
           </div>
         </div>
 
@@ -260,55 +331,7 @@ function Hero() {
         .hero-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
         .hero-meta-val { font-size: 14px; color: var(--ink); font-weight: 500; margin-top: 4px; }
 
-        .hero-photo { position: relative; padding: 0 28px; transform-style: preserve-3d; }
-        .photo-frame {
-          position: relative; aspect-ratio: 4/5;
-          border-radius: 24px; overflow: hidden;
-          border: 1px solid var(--rule-2);
-          box-shadow: var(--shadow-2);
-          transform-origin: center;
-          transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-        }
-        /* glassy edge + accent glow */
-        .photo-frame::after {
-          content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 3;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 0 1px rgba(255,255,255,0.05);
-        }
-        .photo-inner { position: relative; width: 100%; height: 100%; }
-        .photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; display: block; filter: saturate(0.95) contrast(1.02); }
-        .photo-shade { position: absolute; inset: 0; pointer-events: none;
-          background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, transparent 24%, transparent 50%, rgba(0,0,0,0.64) 100%); }
-        .photo-top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; }
-        .photo-tag { background: rgba(0,0,0,0.42); color: #fff; padding: 6px 10px; border-radius: 7px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-        .photo-live { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-        .photo-cap { position: absolute; left: 20px; right: 20px; bottom: 20px; color: #fff; z-index: 2; }
-        .photo-cap .mono { color: rgba(255,255,255,0.74); margin-bottom: 6px; }
-        .photo-quote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 22px; letter-spacing: -0.01em; color: #fff; line-height: 1.1; }
-
-        /* Floating chips */
-        .fchip {
-          position: absolute; z-index: 5;
-          display: flex; align-items: center; gap: 10px;
-          padding: 12px 16px; border-radius: 16px;
-          background: color-mix(in oklab, var(--paper-2) 88%, transparent);
-          border: 1px solid var(--rule-2);
-          box-shadow: var(--shadow-2);
-          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-          transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
-        }
-        .fchip-1 { top: -18px; left: -26px; }
-        .fchip-2 { bottom: 44px; right: -34px; }
-        .fchip-ico { width: 32px; height: 32px; border-radius: 9px; background: var(--accent-soft); border: 1px solid var(--accent); display: grid; place-items: center; color: var(--accent); flex-shrink: 0; }
-        .fchip-val { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 2px; }
-        @media (max-width: 900px) {
-          .fchip-1 { top: -12px; left: -6px; }
-          .fchip-2 { bottom: 28px; right: -6px; }
-        }
-        @media (max-width: 420px) {
-          .fchip { padding: 10px 12px; }
-          .fchip-1 { left: 0; }
-          .fchip-2 { right: 0; }
-        }
+        .hero-photo { position: relative; padding: 0 28px; }
 
         .stats-row {
           display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
