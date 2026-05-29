@@ -1528,9 +1528,9 @@ function Certifications() {
     {
       tier: 'BNSP · National Competence',
       title: 'Marketing',
-      titleSub: 'Sertifikasi Kompetensi',
+      sub: 'Sertifikasi Kompetensi',
       issuer: 'Badan Nasional Sertifikasi Profesi',
-      issuerSub: 'Government-recognized competence certification · Republic of Indonesia',
+      issuerSub: 'Government-recognized competence · Republic of Indonesia',
       score: 'KOMPETEN',
       scoreLabel: 'Status',
       date: '2026',
@@ -1542,16 +1542,16 @@ function Certifications() {
     {
       tier: 'Kemnaker RI · MCCI',
       title: 'Internship',
-      titleSub: 'Higher-Education Internship',
+      sub: 'Higher-Education Internship',
       issuer: 'Kementerian Ketenagakerjaan RI',
-      issuerSub: '6-month program · Administrasi · PT Merak Chemicals Indonesia',
+      issuerSub: '6-month program · Administrasi · PT MCCI',
       score: 'Sangat Baik',
       scoreLabel: 'Predikat',
       date: 'May 2026',
       ref: 'MN.036.012371.02.2025',
       pdf: 'assets/Sertifikat-Magang.pdf',
       icon: 'shield',
-      accent: 'emerald',
+      accent: 'ink',
     },
   ];
 
@@ -1663,66 +1663,36 @@ function Certifications() {
           </p>
         </div>
 
-        {/* TIER 1 — Featured premium cards */}
-        <div className="cert-featured-grid reveal">
+        {/* TIER 1 — Featured cards (matches v2 exactly) */}
+        <div className="cert-feat reveal">
           {featured.map((c, i) => (
-            <a
-              key={i}
-              href={c.pdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`cert-elite cert-elite-${c.accent}`}
-              style={{ animationDelay: `${i * 0.15}s` }}
-            >
-              {/* Holographic shine overlay */}
-              <div className="cert-elite-shine" aria-hidden="true"/>
-              {/* Glow corner */}
-              <div className="cert-elite-corner" aria-hidden="true"/>
-
-              {/* Tier ribbon */}
-              <div className="cert-elite-tier">
-                <span className="cert-elite-tier-dot"/>
+            <a key={i} href={c.pdf} target="_blank" rel="noopener noreferrer" className={`cert-feat-card ${c.accent}`}>
+              <div className="cert-shine" aria-hidden="true"/>
+              <div className="cert-tier">
+                <span className="cert-tier-dot"/>
                 <span>{c.tier}</span>
               </div>
-
-              {/* Icon + arrow */}
-              <div className="cert-elite-meta">
-                <div className="cert-elite-icon">
-                  <Icon name={c.icon} size={22}/>
-                </div>
-                <div className="cert-elite-arrow" aria-hidden="true">
-                  <Icon name="arrow-up-right" size={16}/>
-                </div>
+              <div className="cert-meta-row">
+                <div className="cert-feat-ico"><Icon name={c.icon} size={22}/></div>
+                <div className="cert-feat-arrow"><Icon name="arrow-up-right" size={16}/></div>
               </div>
-
-              {/* Title */}
-              <div className="cert-elite-title-wrap">
-                <div className="cert-elite-title-sub">{c.titleSub}</div>
-                <h3 className="cert-elite-title">{c.title}</h3>
+              <div className="cert-feat-title-wrap">
+                <div className="cert-feat-sub serif">{c.sub}</div>
+                <h3 className="cert-feat-title">{c.title}</h3>
               </div>
-
-              {/* Issuer */}
-              <div className="cert-elite-issuer">
-                <div className="cert-elite-issuer-name">{c.issuer}</div>
-                <div className="cert-elite-issuer-sub">{c.issuerSub}</div>
+              <div className="cert-feat-issuer">
+                <div style={{ fontWeight: 500 }}>{c.issuer}</div>
+                <div style={{ color: 'var(--c-text-3)', fontSize: 12, marginTop: 4 }}>{c.issuerSub}</div>
               </div>
-
-              {/* Score block */}
-              <div className="cert-elite-score-block">
-                <div className="cert-elite-score-label mono">{c.scoreLabel}</div>
-                <div className="cert-elite-score-value">{c.score}</div>
-                <div className="cert-elite-score-line"/>
-                <div className="cert-elite-foot">
+              <div className="cert-feat-score">
+                <div className="mono cert-dimmer">{c.scoreLabel}</div>
+                <div className="cert-feat-score-val serif">{c.score}</div>
+                <div className="cert-feat-foot">
                   <span className="mono">Issued · {c.date}</span>
-                  <span className="mono cert-elite-ref">{c.ref}</span>
+                  <span className="mono cert-dimmer">{c.ref}</span>
                 </div>
               </div>
-
-              {/* Hover CTA */}
-              <div className="cert-elite-cta">
-                <span>Open PDF</span>
-                <Icon name="arrow-up-right" size={14}/>
-              </div>
+              <div className="cert-feat-cta">Open PDF <Icon name="arrow-up-right" size={12}/></div>
             </a>
           ))}
         </div>
@@ -1782,271 +1752,97 @@ function Certifications() {
       </div>
 
       <style>{`
-        /* ============ TIER 1 ELITE CARDS ============ */
-        .cert-featured-grid {
-          display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
-          margin-bottom: 56px;
+        /* ============ TIER 1 FEATURED CARDS — identical to v2 ============ */
+        .cert-feat { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; }
+        .cert-feat-card {
+          --ca: #c8552a; --con: #fff;
+          position: relative; padding: 32px 28px 72px; min-height: 460px;
+          border-radius: 22px; text-decoration: none; color: #1d1d1f;
+          display: flex; flex-direction: column; gap: 22px;
+          border: 1px solid rgba(0,0,0,0.14); overflow: hidden; isolation: isolate;
+          background: #f5f5f7;
+          transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.4s ease;
+          box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -10px rgba(0,0,0,0.10);
         }
-
-        .cert-elite {
-          position: relative;
-          padding: 36px 32px 80px;
-          min-height: 480px;
-          border-radius: 24px;
-          text-decoration: none; color: var(--text);
-          overflow: hidden; isolation: isolate;
-          display: flex; flex-direction: column; gap: 24px;
-          border: 1px solid;
-          opacity: 0; transform: translateY(40px);
-          animation: certRise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-          transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease, box-shadow 0.5s ease;
+        [data-theme="dark"] .cert-feat-card {
+          --ca: #e8794a; --con: #000;
+          color: #f5f5f7; background: #1c1c1e; border-color: rgba(255,255,255,0.18);
+          box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px -10px rgba(0,0,0,0.5);
         }
-        @keyframes certRise { to { opacity: 1; transform: translateY(0); } }
-
-        /* === Gold variant (BNSP) — matches v2 ============================== */
-        .cert-elite-gold {
-          background: linear-gradient(160deg, #faf2d9 0%, #f4e6b5 100%);
-          color: #2a1d05;
-          border-color: rgba(180,130,10,0.25);
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.04),
-            0 8px 24px -10px rgba(0,0,0,0.10);
+        .cert-feat-card.gold { background: linear-gradient(160deg, #faf2d9 0%, #f4e6b5 100%); color: #2a1d05; }
+        [data-theme="dark"] .cert-feat-card.gold {
+          background: linear-gradient(160deg, #2e2410 0%, #1c1709 100%); color: #f4ecd9; border-color: rgba(236,195,79,0.3);
         }
-        [data-theme="dark"] .cert-elite-gold {
-          background: linear-gradient(160deg, #2e2410 0%, #1c1709 100%);
-          color: #f4ecd9;
-          border-color: rgba(236,195,79,0.30);
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.4),
-            0 8px 24px -10px rgba(0,0,0,0.5);
+        .cert-feat-card.ink { background: #f5f5f7; }
+        [data-theme="dark"] .cert-feat-card.ink { background: #1c1c1e; }
+        .cert-feat-card:hover {
+          transform: translateY(-4px); border-color: var(--ca);
+          box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 20px 48px -16px rgba(0,0,0,0.14), 0 40px 80px -32px rgba(0,0,0,0.10);
         }
-        .cert-elite-gold .cert-elite-tier-dot,
-        .cert-elite-gold .cert-elite-icon,
-        .cert-elite-gold .cert-elite-score-value {
-          color: #b88800;
+        [data-theme="dark"] .cert-feat-card:hover {
+          box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 20px 48px -16px rgba(0,0,0,0.6), 0 40px 80px -32px rgba(0,0,0,0.6);
         }
-        [data-theme="dark"] .cert-elite-gold .cert-elite-tier-dot,
-        [data-theme="dark"] .cert-elite-gold .cert-elite-icon,
-        [data-theme="dark"] .cert-elite-gold .cert-elite-score-value {
-          color: #ecc34f;
+        .cert-shine {
+          position: absolute; inset: 0; pointer-events: none; opacity: 0.6;
+          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.5) 50%, transparent 70%);
+          background-size: 250% 100%; background-position: 200% 0;
+          transition: background-position 1s cubic-bezier(0.16,1,0.3,1);
         }
-        .cert-elite-gold .cert-elite-icon {
-          background: rgba(180,130,10,0.14);
-          border-color: rgba(180,130,10,0.30);
+        .cert-feat-card:hover .cert-shine { background-position: -100% 0; }
+        .cert-feat-card > *:not(.cert-shine):not(.cert-feat-cta) { position: relative; z-index: 1; }
+        .cert-tier {
+          display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px;
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+          border-radius: 999px; background: rgba(31,26,20,0.06); border: 1px solid rgba(31,26,20,0.1);
+          align-self: flex-start; color: inherit;
         }
-        [data-theme="dark"] .cert-elite-gold .cert-elite-icon {
-          background: rgba(236,195,79,0.12);
-          border-color: rgba(236,195,79,0.30);
+        [data-theme="dark"] .cert-tier { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+        .cert-feat-card.gold .cert-tier { background: rgba(180,130,10,0.12); border-color: rgba(180,130,10,0.25); }
+        .cert-tier-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px currentColor; }
+        .cert-meta-row { display: flex; justify-content: space-between; align-items: center; }
+        .cert-feat-ico {
+          width: 54px; height: 54px; border-radius: 16px;
+          background: rgba(200,85,42,0.12); border: 1px solid rgba(200,85,42,0.25);
+          display: grid; place-items: center; color: var(--ca);
         }
-        .cert-elite-gold .cert-elite-score-value {
-          filter: drop-shadow(0 0 24px rgba(184,136,0,0.35));
-        }
-        [data-theme="dark"] .cert-elite-gold .cert-elite-score-value {
-          filter: drop-shadow(0 0 24px rgba(236,195,79,0.40));
-        }
-        .cert-elite-gold:hover {
-          border-color: var(--accent);
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.04),
-            0 20px 48px -16px rgba(0,0,0,0.18),
-            0 40px 80px -32px rgba(0,0,0,0.16);
-        }
-        [data-theme="dark"] .cert-elite-gold:hover {
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.4),
-            0 20px 48px -16px rgba(0,0,0,0.55),
-            0 40px 80px -32px rgba(0,0,0,0.55);
-        }
-        .cert-elite-gold .cert-elite-cta {
-          background: #b88800;
-          color: #faf2d9;
-        }
-        [data-theme="dark"] .cert-elite-gold .cert-elite-cta {
-          background: #ecc34f;
-          color: #1c1709;
-        }
-
-        /* === Ink variant (Internship) — matches v2 ============================== */
-        .cert-elite-emerald {
-          background: var(--c-panel);
-          border-color: var(--hairline-strong);
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.04),
-            0 8px 24px -10px rgba(0,0,0,0.10);
-        }
-        [data-theme="dark"] .cert-elite-emerald {
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.4),
-            0 8px 24px -10px rgba(0,0,0,0.5);
-        }
-        .cert-elite-emerald:hover {
-          border-color: var(--accent);
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.04),
-            0 20px 48px -16px rgba(0,0,0,0.18),
-            0 40px 80px -32px rgba(0,0,0,0.16);
-        }
-        [data-theme="dark"] .cert-elite-emerald:hover {
-          box-shadow:
-            0 1px 2px rgba(0,0,0,0.4),
-            0 20px 48px -16px rgba(0,0,0,0.55),
-            0 40px 80px -32px rgba(0,0,0,0.55);
-        }
-
-        .cert-elite:hover { transform: translateY(-4px); }
-
-        /* Holographic shine sweep */
-        .cert-elite-shine {
-          position: absolute; inset: 0; pointer-events: none;
-          background: linear-gradient(115deg,
-            transparent 30%,
-            var(--c-line-06) 45%,
-            var(--c-line-09) 50%,
-            var(--c-line-06) 55%,
-            transparent 70%);
-          background-size: 250% 100%;
-          background-position: 200% 0;
-          transition: background-position 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-          mix-blend-mode: overlay;
-          z-index: 1;
-        }
-        .cert-elite:hover .cert-elite-shine { background-position: -100% 0; }
-
-        /* Corner glow that pulses */
-        .cert-elite-corner {
-          position: absolute; top: -50%; right: -50%;
-          width: 100%; height: 100%;
-          background: radial-gradient(circle, var(--c-line-05) 0%, transparent 60%);
-          z-index: 0;
-          animation: cornerPulse 4s ease-in-out infinite;
-        }
-        @keyframes cornerPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-
-        .cert-elite > *:not(.cert-elite-shine):not(.cert-elite-corner):not(.cert-elite-cta) {
-          position: relative; z-index: 2;
-        }
-
-        /* Tier ribbon */
-        .cert-elite-tier {
-          display: inline-flex; align-items: center; gap: 8px;
-          padding: 7px 14px;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
-          border-radius: 999px;
-          background: var(--c-shadow-05);
-          border: 1px solid var(--c-line-07);
-          backdrop-filter: blur(8px);
-          align-self: flex-start;
-          color: var(--text-2);
-        }
-        .cert-elite-tier-dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: var(--accent);
-          box-shadow: 0 0 10px currentColor;
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Meta row */
-        .cert-elite-meta {
-          display: flex; align-items: center; justify-content: space-between;
-        }
-        .cert-elite-icon {
-          width: 56px; height: 56px; border-radius: 16px;
-          background: var(--accent-glow);
-          border: 1px solid color-mix(in oklch, var(--c-accent) 30%, transparent);
-          display: flex; align-items: center; justify-content: center;
-          color: var(--accent);
-          box-shadow:
-            0 4px 12px var(--c-shadow-06),
-            0 0 24px -8px var(--accent-glow);
-        }
-        .cert-elite-arrow {
+        .cert-feat-card.gold .cert-feat-ico { background: rgba(180,130,10,0.15); border-color: rgba(180,130,10,0.3); color: #8a6500; }
+        [data-theme="dark"] .cert-feat-card.gold .cert-feat-ico { color: #ecc34f; background: rgba(236,195,79,0.12); border-color: rgba(236,195,79,0.3); }
+        .cert-feat-arrow {
           width: 40px; height: 40px; border-radius: 50%;
-          background: var(--c-line-05);
-          border: 1px solid var(--c-line-08);
-          display: flex; align-items: center; justify-content: center;
-          color: var(--text);
-          transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+          background: rgba(31,26,20,0.06); border: 1px solid rgba(31,26,20,0.1); display: grid; place-items: center;
+          transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, color 0.3s ease;
         }
-        .cert-elite:hover .cert-elite-arrow {
-          transform: rotate(-25deg) scale(1.1);
-          background: var(--text); color: var(--bg);
-          border-color: var(--text);
-        }
-
-        /* Title */
-        .cert-elite-title-wrap { display: flex; flex-direction: column; gap: 6px; }
-        .cert-elite-title-sub {
-          font-size: 13px; color: var(--text-3);
-          font-family: 'Instrument Serif', serif; font-style: italic;
-          letter-spacing: -0.005em;
-        }
-        .cert-elite-title {
-          font-size: clamp(32px, 4vw, 48px);
-          font-weight: 700; letter-spacing: -0.035em;
-          line-height: 0.95; margin: 0;
-          background: linear-gradient(180deg, var(--c-line-12) 30%, var(--c-text-soft) 100%);
-          -webkit-background-clip: text; background-clip: text;
-          color: transparent;
-        }
-
-        /* Issuer */
-        .cert-elite-issuer {
-          padding-top: 14px;
-          border-top: 1px solid var(--c-line-07);
-        }
-        .cert-elite-issuer-name {
-          font-size: 14px; font-weight: 500;
-          color: var(--text); letter-spacing: -0.005em;
-        }
-        .cert-elite-issuer-sub {
-          font-size: 12px; color: var(--text-3); margin-top: 4px; line-height: 1.5;
-        }
-
-        /* Score block */
-        .cert-elite-score-block {
-          margin-top: auto;
-          padding-top: 18px;
-          border-top: 1px solid var(--c-line-07);
-          display: flex; flex-direction: column; gap: 4px;
-        }
-        .cert-elite-score-label { color: var(--text-3); }
-        .cert-elite-score-value {
-          font-family: 'Instrument Serif', serif;
-          font-size: clamp(34px, 4vw, 44px);
-          color: var(--accent);
-          letter-spacing: -0.01em; line-height: 1;
-          filter: drop-shadow(0 0 24px var(--accent-glow));
-        }
-        .cert-elite-score-line {
-          height: 1px; margin-top: 10px;
-          background: linear-gradient(90deg, var(--c-line-09), transparent);
-        }
-        .cert-elite-foot {
-          margin-top: 6px;
-          display: flex; justify-content: space-between; gap: 12px;
-          color: var(--text-3);
-          flex-wrap: wrap;
-        }
-        .cert-elite-ref { opacity: 0.7; }
-
-        /* CTA pill */
-        .cert-elite-cta {
-          position: absolute; bottom: 20px; right: 20px;
+        [data-theme="dark"] .cert-feat-arrow { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+        .cert-feat-card:hover .cert-feat-arrow { transform: rotate(-30deg); background: currentColor; color: #f5f5f7; }
+        [data-theme="dark"] .cert-feat-card:hover .cert-feat-arrow { color: #000; }
+        .cert-feat-title-wrap { display: flex; flex-direction: column; gap: 6px; }
+        .cert-feat-sub { font-size: 13px; color: #6e6e73; }
+        [data-theme="dark"] .cert-feat-sub { color: #86868b; }
+        .cert-feat-title { font-family: 'Fraunces', serif; font-weight: 400; font-style: normal; font-size: clamp(32px, 4vw, 50px); line-height: 0.95; letter-spacing: -0.035em; margin: 0; }
+        .cert-feat-issuer { padding-top: 14px; border-top: 1px solid rgba(31,26,20,0.1); font-size: 14px; }
+        [data-theme="dark"] .cert-feat-issuer { border-top-color: rgba(255,255,255,0.1); }
+        .cert-feat-card.gold .cert-feat-issuer { border-top-color: rgba(120,80,0,0.2); }
+        .cert-feat-score { margin-top: auto; padding-top: 18px; border-top: 1px solid rgba(31,26,20,0.1); display: flex; flex-direction: column; gap: 6px; }
+        [data-theme="dark"] .cert-feat-score { border-top-color: rgba(255,255,255,0.1); }
+        .cert-feat-card.gold .cert-feat-score { border-top-color: rgba(120,80,0,0.2); }
+        .cert-feat-score-val { font-size: clamp(34px, 4vw, 46px); line-height: 1; letter-spacing: -0.01em; color: var(--ca); }
+        .cert-feat-card.gold .cert-feat-score-val { color: #b88800; }
+        [data-theme="dark"] .cert-feat-card.gold .cert-feat-score-val { color: #ecc34f; }
+        .cert-feat-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 8px; color: #6e6e73; }
+        [data-theme="dark"] .cert-feat-foot { color: #86868b; }
+        .cert-dimmer { color: #6e6e73; }
+        [data-theme="dark"] .cert-dimmer { color: #86868b; }
+        .cert-feat-cta {
+          position: absolute; bottom: 18px; right: 18px;
           padding: 8px 14px; border-radius: 999px;
-          background: var(--accent); color: var(--c-on-accent);
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+          background: var(--ca); color: var(--con);
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
           font-weight: 600;
           display: inline-flex; align-items: center; gap: 6px;
-          opacity: 0; transform: translateY(12px) scale(0.92);
-          transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-          z-index: 3;
-          box-shadow: 0 12px 24px -4px var(--accent-glow);
+          opacity: 0; transform: translateY(10px); z-index: 2;
+          transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .cert-elite:hover .cert-elite-cta {
-          opacity: 1; transform: translateY(0) scale(1);
-        }
+        .cert-feat-card:hover .cert-feat-cta { opacity: 1; transform: translateY(0); }
 
         /* ============ TIER 2 ESSENTIAL SKILLS ============ */
         .cert-skills-head {
@@ -2213,13 +2009,13 @@ function Certifications() {
         }
 
         @media (max-width: 900px) {
-          .cert-featured-grid { grid-template-columns: 1fr; }
+          .cert-feat { grid-template-columns: 1fr; }
           .cert-skills-grid { grid-template-columns: 1fr; }
           .cert-training-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 560px) {
-          .cert-elite { padding: 26px 22px 72px; min-height: 420px; }
-          .cert-elite-foot { font-size: 9px; }
+          .cert-feat-card { padding: 26px 22px 68px; min-height: 400px; }
+          .cert-feat-foot { font-size: 9px; }
           .cert-training-grid { grid-template-columns: 1fr; }
         }
       `}</style>
