@@ -200,7 +200,7 @@ function Hero() {
               <div className="photo-tape t2"/>
               <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar"/>
               <div className="photo-meta">
-                <span className="mono">Cilegon · 2025</span>
+                <span className="mono">Jakarta · 2025</span>
               </div>
             </div>
 
@@ -1334,10 +1334,9 @@ function Footer() {
     <footer style={{ padding: '32px 0 48px', borderTop: '1px solid var(--rule)', position: 'relative', zIndex: 2 }}>
       <div className="wrap" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span className="nav-mark" style={{ width: 24, height: 24, fontSize: 14 }}>M</span>
-          <span style={{ fontSize: 13, color: 'var(--ink-2)' }}>© 2026 Muhammad Irfan Kautsar — folio · v2.</span>
+          <span className="nav-mark" style={{ width: 24, height: 24, fontSize: 14 }}>M<span className="acc">.</span></span>
+          <span style={{ fontSize: 13, color: 'var(--ink-2)' }}>© 2026 Muhammad Irfan Kautsar.</span>
         </div>
-        <div className="mono">designed & built · cilegon</div>
       </div>
     </footer>
   );
