@@ -196,8 +196,6 @@ function Hero() {
           <div className="hero-photo">
             <div className="photo-frame"
               style={{ transform: `perspective(1400px) rotateY(${mouse.x * 0.35}deg) rotateX(${-mouse.y * 0.35}deg)` }}>
-              <div className="photo-tape t1"/>
-              <div className="photo-tape t2"/>
               <div className="photo-inner">
                 <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar"/>
                 <div className="photo-shade"/>
@@ -265,31 +263,27 @@ function Hero() {
         .hero-photo { position: relative; padding: 0 28px; transform-style: preserve-3d; }
         .photo-frame {
           position: relative; aspect-ratio: 4/5;
-          background: var(--paper-3); padding: 14px;
+          border-radius: 24px; overflow: hidden;
+          border: 1px solid var(--rule-2);
           box-shadow: var(--shadow-2);
           transform-origin: center;
           transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-          border-radius: 6px;
         }
-        .photo-inner { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 3px; }
+        /* glassy edge + accent glow */
+        .photo-frame::after {
+          content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 3;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .photo-inner { position: relative; width: 100%; height: 100%; }
         .photo-inner img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; display: block; filter: saturate(0.95) contrast(1.02); }
         .photo-shade { position: absolute; inset: 0; pointer-events: none;
           background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, transparent 24%, transparent 50%, rgba(0,0,0,0.64) 100%); }
-        .photo-top { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .photo-top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; }
         .photo-tag { background: rgba(0,0,0,0.42); color: #fff; padding: 6px 10px; border-radius: 7px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
         .photo-live { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-        .photo-cap { position: absolute; left: 18px; right: 18px; bottom: 18px; color: #fff; }
+        .photo-cap { position: absolute; left: 20px; right: 20px; bottom: 20px; color: #fff; z-index: 2; }
         .photo-cap .mono { color: rgba(255,255,255,0.74); margin-bottom: 6px; }
         .photo-quote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 22px; letter-spacing: -0.01em; color: #fff; line-height: 1.1; }
-        .photo-tape {
-          position: absolute; width: 84px; height: 22px; z-index: 4;
-          background: rgba(236,195,79,0.6);
-          backdrop-filter: blur(2px);
-          box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-        .photo-tape.t1 { top: -10px; left: 30%; transform: rotate(-6deg); }
-        .photo-tape.t2 { top: -10px; right: 22%; transform: rotate(8deg); }
-        [data-theme="dark"] .photo-tape { background: rgba(232,121,74,0.4); }
 
         /* Floating chips */
         .fchip {
