@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(winget install --id qpdf.qpdf -e --accept-source-agreements --accept-package-agreements --silent 2>&1)"
+      "PowerShell(winget install --id qpdf.qpdf -e --accept-source-agreements --accept-package-agreements --silent 2>&1)",
+      "PowerShell(\"---- UNTRACKED ----\")"
     ]
   }
 }

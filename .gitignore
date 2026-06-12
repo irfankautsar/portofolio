@@ -7,3 +7,6 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+.preview-server.js
+.claude/launch.json
