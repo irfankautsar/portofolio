@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "PowerShell(winget install --id qpdf.qpdf -e --accept-source-agreements --accept-package-agreements --silent 2>&1)",
-      "PowerShell(\"---- UNTRACKED ----\")"
+      "PowerShell(\"---- UNTRACKED ----\")",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\Akmal\\\\Desktop\\\\Porto Web Asset\\\\assets\\\\instagram\" -Recurse -Force | Format-Table Name, Extension, @{N='KB';E={[math]::Round\\($_.Length/1KB\\)}} -AutoSize)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git add *)"
     ]
   }
 }

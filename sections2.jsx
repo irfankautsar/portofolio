@@ -140,7 +140,7 @@ function HeroPortrait() {
       style={{ '--gx': `${t.gx}%`, '--gy': `${t.gy}%` }}>
       <div className="hp-card"
         style={{ transform: `rotateY(${t.x * MAX}deg) rotateX(${-t.y * MAX}deg) translateZ(0) scale(${t.active ? 1.02 : 1})` }}>
-        <img className="hp-img" src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar" draggable="false"/>
+        <img className="hp-img" src="assets/portrait.webp" alt="Muhammad Irfan Kautsar" draggable="false"/>
         <div className="hp-wash"/>
         <div className="hp-glare"/>
         <div className="hp-top">
@@ -577,7 +577,7 @@ function AfterMovie() {
   return (
     <div className="rev am-card card">
       <div className="am-cover" onClick={toggle} role="button" aria-label={play ? 'Pause' : 'Play'} data-cursor={play ? 'Pause' : 'Play'}>
-        <img src="assets/after-movie-cover.jpg" alt="After Movie"/>
+        <img src="assets/after-movie-cover.webp" alt="After Movie"/>
         <div className="am-shade"/>
         <div className="am-tag">After Movie · 2026</div>
         <a href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing"
@@ -740,22 +740,22 @@ function PowerBI() {
 
 /* ---------- ACTIVITIES BENTO + LIGHTBOX ---------- */
 const ACTIVITIES = [
-  { src: 'assets/activities/forum-csr-cilegon.jpg', tag: 'CSR Forum', title: 'Cilegon City CSR Forum', year: '2026', location: 'Cilegon · Banten', partners: ['Pemkot Cilegon', 'TNI/POLRI', 'Forum CSR Banten'], desc: 'Inter-corporate gathering convened by the city government to coordinate CSR programs across local industry. Representatives from MCCI, TNI/POLRI, and other Banten companies aligning priorities for the year ahead.', role: 'Attended on behalf of MCCI Corporate Affairs — networking with fellow CSR practitioners and capturing key talking points.', span: 'wide' },
-  { src: 'assets/activities/team-corporate-affairs.jpg', tag: 'Team', title: 'Corporate Affairs Trainees', year: '2026', location: 'MCCI HQ Lobby', partners: ['Corporate Affairs Team'], desc: 'The MCCI Corporate Affairs trainee cohort in front of the lobby wall — "Harmonize for Sustainable Growth". Four trainees, one mission: support every CSR program the division puts out.', role: 'Day-to-day teammate alongside three other trainees, splitting fieldwork and documentation.' },
-  { src: 'assets/activities/kacang-umpet.jpg', tag: 'UMKM · Branding', title: 'Kacang Umpet — Product Poster', year: '2025', location: 'Gemara, Cilegon Banten', partners: ['UMKM Gemara', 'MCCI', 'BPOM Halal'], desc: 'Promotional poster for "Kacang Umpet", a 150g traditional snack from an MCCI-mentored UMKM. The label carries the MCCI sponsorship mark and Indonesian Halal certification.', role: 'Helped coordinate visual direction, sponsor placement, and Halal-mark compliance.', span: 'tall' },
-  { src: 'assets/activities/saung-aksara.jpg', tag: 'CSR · Literacy', title: 'Saung Aksara — Reading Room', year: '2025', location: 'Village near Cilegon', partners: ['Local volunteers', 'MCCI CSR'], desc: 'A village reading room funded by MCCI\'s Saung Aksara program — children with hands raised and shelves stacked with donated books. The closest thing to a library for many of the kids here.', role: 'Logistics support during the launch and follow-up documentation for the CSR report.' },
-  { src: 'assets/activities/ayam-petelur.jpg', tag: 'CSR · Livelihood', title: 'Ayam Petelur — Layer Hen Farm', year: '2026', location: 'Community farm, Banten', partners: ['Local farmer co-op', 'MCCI CSR'], desc: 'Inside the community-run layer hen barn supported by MCCI — neat rows of cages and a small whiteboard tracking production. A sustainable-livelihood program designed for ongoing income.', role: 'Field visit to verify progress, photograph the operation, and write the monthly progress note.' },
-  { src: 'assets/activities/umkm-kegiatan.jpg', tag: 'UMKM · Training', title: 'Rumah Siap Kerja — Culinary Workshop', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Hands-on culinary workshop under the city\'s "Rumah Siap Kerja" program — kuliner, kerajinan, and marketing modules rolled into one.', role: 'On-site documentation; wrote the recap shared with Diskop Cilegon and MCCI management.' },
-  { src: 'assets/activities/umkm-produk.jpg', tag: 'UMKM · Graduation', title: 'UMKM Closing Ceremony', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Graduation day for the UMKM cohort — participants holding the finished yellow-packaged snack they produced and branded over the program.', role: 'Coordinated the closing event and captured the cohort portrait for the program report.' },
-  { src: 'assets/activities/kebun-gizi.jpg', tag: 'CSR · UMKM', title: 'UMKM Producer — Kebun Gizi', year: '2025', location: 'Village UMKM site, Banten', partners: ['Village producer', 'MCCI'], desc: 'A UMKM producer holding the finished "Kacang Umpet" retail pack at her village home, the Kebun Gizi nutrition garden plots visible behind her.', role: 'Field visit and producer interview; photo used in the social-media and report rollout.' },
-  { src: 'assets/activities/nelayan.jpg', tag: 'CSR · Fisheries', title: 'CSR MCCI × KKP — Fisheries Support', year: '2025', location: 'Coastal community, Banten', partners: ['KKP', 'MCCI'], desc: 'An officer from KKP and an MCCI representative present the "CSR MCCI Support Fisheries with KKP" sign — water-storage drums ready for handover to the local fishing community.', role: 'Coordinated logistics with the KKP focal point and documented the handover.' },
-  { src: 'assets/activities/nelayan-kkp.jpg', tag: 'CSR · Ramadhan', title: 'Donasi Ramadhan & Idul Fitri 1447H', year: '2026', location: 'Fishing community, Banten', partners: ['Local fisherman community', 'MCCI'], desc: 'Handover photo with members of a coastal community — MCCI placard, packed white sembako bags lined up at their feet, ready for distribution.', role: 'Part of the on-site MCCI team — handover, distribution flow, and documentation.' },
-  { src: 'assets/activities/mudik-walikota.jpg', tag: 'Community Event', title: 'Mudik Gratis 2026 — Opening Ceremony', year: '2026', location: 'Cilegon City Square', partners: ['Walikota Cilegon', 'TNI/POLRI', 'Bank BJB', 'MCCI'], desc: 'Stage line-up at the official opening — the Mayor of Cilegon center-stage flanked by TNI, POLRI, Garnisun, and Dishub officers with corporate partners including MCCI behind.', role: 'On-site as MCCI Corporate Affairs documentation lead for the ceremony.', span: 'wide' },
-  { src: 'assets/activities/mudik-bus.jpg', tag: 'Documentation', title: 'Mudik Gratis — Cilegon → Semarang, Bus #27', year: '2026', location: 'Cilegon departure point', partners: ['Pemkot Cilegon', 'MCCI'], desc: 'Bus 27 of the Mudik Gratis fleet — sponsored by MCCI. Captured at departure before the run-down call with passengers.', role: 'Captured per-bus departure documentation used across MCCI socials and the Pemkot report.' },
-  { src: 'assets/activities/idul-adha.jpg', tag: 'CSR · Idul Adha', title: 'Qurban Prep — Villa Ternak', year: '2025', location: 'Villa Ternak / Villa Qurban', partners: ['Villa Qurban', 'MCCI'], desc: 'Sheep and goats lined up at the partner farm during Qurban procurement for MCCI\'s Idul Adha program. Livestock dispatched to surrounding mosques for meat distribution.', role: 'Site visit for livestock verification (count, condition, certification) before the program ran.' },
-  { src: 'assets/activities/sembako-ramadhan.jpg', tag: 'CSR · Ramadhan', title: 'Beras Donasi Idul Fitri 2026', year: '2026', location: 'Cilegon distribution point', partners: ['Local community partners', 'MCCI'], desc: 'Pickup truck stacked with bags of donated rice — each stamped "Beras Donasi Hari Raya Idul Fitri Tahun 2026 · MCCI · Harmonize for Sustainable Growth".', role: 'Helped coordinate packing, loading, and distribution logistics across multiple drop points.' },
-  { src: 'assets/activities/industry-tour-its.jpg', tag: 'Industry · Hosting', title: 'ITS K63 Study Excursion', year: '2026', location: 'MCCI Administration Building', partners: ['Teknik Kimia ITS Surabaya', 'MCCI'], desc: 'Sixty-plus Chemical Engineering students from ITS Surabaya on their 21–24 April 2026 Study Excursion — hosted at MCCI for a plant tour and Corporate Affairs Q&A.', role: 'Front-of-house coordination for guest reception, welcome materials, and group portrait.' },
-  { src: 'assets/activities/powerbi-presentation.jpg', tag: 'Reporting · Internal', title: 'Power BI Presentation — "My Task"', year: '2026', location: 'MCCI Meeting Room', partners: ['Corporate Affairs Team'], desc: 'Walking the team through the scope of what trainees support: proposal review, program prep, stakeholder communication, content scheduling, and Instagram analytics through Power BI.', role: 'Owned the Instagram analytics & content-calendar workstream; presented findings to the team.' },
+  { src: 'assets/activities/forum-csr-cilegon.webp', tag: 'CSR Forum', title: 'Cilegon City CSR Forum', year: '2026', location: 'Cilegon · Banten', partners: ['Pemkot Cilegon', 'TNI/POLRI', 'Forum CSR Banten'], desc: 'Inter-corporate gathering convened by the city government to coordinate CSR programs across local industry. Representatives from MCCI, TNI/POLRI, and other Banten companies aligning priorities for the year ahead.', role: 'Attended on behalf of MCCI Corporate Affairs — networking with fellow CSR practitioners and capturing key talking points.', span: 'wide' },
+  { src: 'assets/activities/team-corporate-affairs.webp', tag: 'Team', title: 'Corporate Affairs Trainees', year: '2026', location: 'MCCI HQ Lobby', partners: ['Corporate Affairs Team'], desc: 'The MCCI Corporate Affairs trainee cohort in front of the lobby wall — "Harmonize for Sustainable Growth". Four trainees, one mission: support every CSR program the division puts out.', role: 'Day-to-day teammate alongside three other trainees, splitting fieldwork and documentation.' },
+  { src: 'assets/activities/kacang-umpet.webp', tag: 'UMKM · Branding', title: 'Kacang Umpet — Product Poster', year: '2025', location: 'Gemara, Cilegon Banten', partners: ['UMKM Gemara', 'MCCI', 'BPOM Halal'], desc: 'Promotional poster for "Kacang Umpet", a 150g traditional snack from an MCCI-mentored UMKM. The label carries the MCCI sponsorship mark and Indonesian Halal certification.', role: 'Helped coordinate visual direction, sponsor placement, and Halal-mark compliance.', span: 'tall' },
+  { src: 'assets/activities/saung-aksara.webp', tag: 'CSR · Literacy', title: 'Saung Aksara — Reading Room', year: '2025', location: 'Village near Cilegon', partners: ['Local volunteers', 'MCCI CSR'], desc: 'A village reading room funded by MCCI\'s Saung Aksara program — children with hands raised and shelves stacked with donated books. The closest thing to a library for many of the kids here.', role: 'Logistics support during the launch and follow-up documentation for the CSR report.' },
+  { src: 'assets/activities/ayam-petelur.webp', tag: 'CSR · Livelihood', title: 'Ayam Petelur — Layer Hen Farm', year: '2026', location: 'Community farm, Banten', partners: ['Local farmer co-op', 'MCCI CSR'], desc: 'Inside the community-run layer hen barn supported by MCCI — neat rows of cages and a small whiteboard tracking production. A sustainable-livelihood program designed for ongoing income.', role: 'Field visit to verify progress, photograph the operation, and write the monthly progress note.' },
+  { src: 'assets/activities/umkm-kegiatan.webp', tag: 'UMKM · Training', title: 'Rumah Siap Kerja — Culinary Workshop', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Hands-on culinary workshop under the city\'s "Rumah Siap Kerja" program — kuliner, kerajinan, and marketing modules rolled into one.', role: 'On-site documentation; wrote the recap shared with Diskop Cilegon and MCCI management.' },
+  { src: 'assets/activities/umkm-produk.webp', tag: 'UMKM · Graduation', title: 'UMKM Closing Ceremony', year: '2025', location: 'Klinik UMKM Diskop Cilegon', partners: ['Diskop Kota Cilegon', 'MCCI'], desc: 'Graduation day for the UMKM cohort — participants holding the finished yellow-packaged snack they produced and branded over the program.', role: 'Coordinated the closing event and captured the cohort portrait for the program report.' },
+  { src: 'assets/activities/kebun-gizi.webp', tag: 'CSR · UMKM', title: 'UMKM Producer — Kebun Gizi', year: '2025', location: 'Village UMKM site, Banten', partners: ['Village producer', 'MCCI'], desc: 'A UMKM producer holding the finished "Kacang Umpet" retail pack at her village home, the Kebun Gizi nutrition garden plots visible behind her.', role: 'Field visit and producer interview; photo used in the social-media and report rollout.' },
+  { src: 'assets/activities/nelayan.webp', tag: 'CSR · Fisheries', title: 'CSR MCCI × KKP — Fisheries Support', year: '2025', location: 'Coastal community, Banten', partners: ['KKP', 'MCCI'], desc: 'An officer from KKP and an MCCI representative present the "CSR MCCI Support Fisheries with KKP" sign — water-storage drums ready for handover to the local fishing community.', role: 'Coordinated logistics with the KKP focal point and documented the handover.' },
+  { src: 'assets/activities/nelayan-kkp.webp', tag: 'CSR · Ramadhan', title: 'Donasi Ramadhan & Idul Fitri 1447H', year: '2026', location: 'Fishing community, Banten', partners: ['Local fisherman community', 'MCCI'], desc: 'Handover photo with members of a coastal community — MCCI placard, packed white sembako bags lined up at their feet, ready for distribution.', role: 'Part of the on-site MCCI team — handover, distribution flow, and documentation.' },
+  { src: 'assets/activities/mudik-walikota.webp', tag: 'Community Event', title: 'Mudik Gratis 2026 — Opening Ceremony', year: '2026', location: 'Cilegon City Square', partners: ['Walikota Cilegon', 'TNI/POLRI', 'Bank BJB', 'MCCI'], desc: 'Stage line-up at the official opening — the Mayor of Cilegon center-stage flanked by TNI, POLRI, Garnisun, and Dishub officers with corporate partners including MCCI behind.', role: 'On-site as MCCI Corporate Affairs documentation lead for the ceremony.', span: 'wide' },
+  { src: 'assets/activities/mudik-bus.webp', tag: 'Documentation', title: 'Mudik Gratis — Cilegon → Semarang, Bus #27', year: '2026', location: 'Cilegon departure point', partners: ['Pemkot Cilegon', 'MCCI'], desc: 'Bus 27 of the Mudik Gratis fleet — sponsored by MCCI. Captured at departure before the run-down call with passengers.', role: 'Captured per-bus departure documentation used across MCCI socials and the Pemkot report.' },
+  { src: 'assets/activities/idul-adha.webp', tag: 'CSR · Idul Adha', title: 'Qurban Prep — Villa Ternak', year: '2025', location: 'Villa Ternak / Villa Qurban', partners: ['Villa Qurban', 'MCCI'], desc: 'Sheep and goats lined up at the partner farm during Qurban procurement for MCCI\'s Idul Adha program. Livestock dispatched to surrounding mosques for meat distribution.', role: 'Site visit for livestock verification (count, condition, certification) before the program ran.' },
+  { src: 'assets/activities/sembako-ramadhan.webp', tag: 'CSR · Ramadhan', title: 'Beras Donasi Idul Fitri 2026', year: '2026', location: 'Cilegon distribution point', partners: ['Local community partners', 'MCCI'], desc: 'Pickup truck stacked with bags of donated rice — each stamped "Beras Donasi Hari Raya Idul Fitri Tahun 2026 · MCCI · Harmonize for Sustainable Growth".', role: 'Helped coordinate packing, loading, and distribution logistics across multiple drop points.' },
+  { src: 'assets/activities/industry-tour-its.webp', tag: 'Industry · Hosting', title: 'ITS K63 Study Excursion', year: '2026', location: 'MCCI Administration Building', partners: ['Teknik Kimia ITS Surabaya', 'MCCI'], desc: 'Sixty-plus Chemical Engineering students from ITS Surabaya on their 21–24 April 2026 Study Excursion — hosted at MCCI for a plant tour and Corporate Affairs Q&A.', role: 'Front-of-house coordination for guest reception, welcome materials, and group portrait.' },
+  { src: 'assets/activities/powerbi-presentation.webp', tag: 'Reporting · Internal', title: 'Power BI Presentation — "My Task"', year: '2026', location: 'MCCI Meeting Room', partners: ['Corporate Affairs Team'], desc: 'Walking the team through the scope of what trainees support: proposal review, program prep, stakeholder communication, content scheduling, and Instagram analytics through Power BI.', role: 'Owned the Instagram analytics & content-calendar workstream; presented findings to the team.' },
 ];
 
 function Activities() {
@@ -920,6 +920,162 @@ function Activities() {
   );
 }
 
+/* ---------- SOCIAL MEDIA DESIGN ---------- */
+const INSTAGRAM = [
+  { kind: 'feed',  src: 'assets/instagram/feed-safety-contest.webp',   title: 'Safety Contest 2026',     tag: 'HSE Campaign', cap: 'Membangun budaya keselamatan dan kesehatan kerja.' },
+  { kind: 'story', src: 'assets/instagram/story-safety-first.webp',     title: 'Safety First',            tag: 'HSE',          cap: 'Komitmen menjaga keselamatan dan kesehatan kerja.' },
+  { kind: 'story', src: 'assets/instagram/story-panen-raya.webp',       title: 'Panen Raya 2026',         tag: 'CSR · Agri',   cap: 'Menanam kepedulian, memanen kesejahteraan.' },
+  { kind: 'story', src: 'assets/instagram/story-peresmian-sumur.webp',  title: 'Peresmian Sumur',         tag: 'CSR · Water',  cap: 'Mengalirkan harapan, menghadirkan kehidupan melalui akses air bersih.' },
+  { kind: 'story', src: 'assets/instagram/story-hut-cilegon.webp',      title: 'HUT Kota Cilegon ke-27',  tag: 'Greeting',     cap: 'Selamat hari ulang tahun Kota Cilegon ke-27 · 27 April 2026.' },
+  { kind: 'story', src: 'assets/instagram/story-hari-buruh.webp',       title: 'Hari Buruh Nasional',     tag: 'Greeting',     cap: '“Kerja keras hari ini, untuk masa depan yang lebih baik.”' },
+];
+
+function SocialDesign() {
+  const [idx, setIdx] = React.useState(null);
+  const open = idx !== null ? INSTAGRAM[idx] : null;
+
+  React.useEffect(() => {
+    if (idx === null) return;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e) => {
+      if (e.key === 'Escape') setIdx(null);
+      if (e.key === 'ArrowRight') setIdx(i => (i + 1) % INSTAGRAM.length);
+      if (e.key === 'ArrowLeft')  setIdx(i => (i - 1 + INSTAGRAM.length) % INSTAGRAM.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey); };
+  }, [idx]);
+
+  return (
+    <>
+      <div className="rev gallery-head ig-head">
+        <div>
+          <span className="mono">// social design · {INSTAGRAM.length} creatives</span>
+          <h3 style={{ marginTop: 6 }}>Social Media Design</h3>
+        </div>
+        <p style={{ fontSize: 14, color: 'var(--ink-3)', maxWidth: 340 }}>
+          Instagram feed &amp; story creatives built for PT Merak Chemicals Indonesia — HSE, CSR, and corporate moments. <span className="dimmer">Tap any to view full.</span>
+        </p>
+      </div>
+
+      <div className="ig-rail">
+        {INSTAGRAM.map((it, i) => (
+          <button key={i} onClick={() => setIdx(i)} className={`ig-card rev ${it.kind}`} data-cursor="Open" aria-label={`Open ${it.title}`}>
+            <img src={it.src} alt={it.title} loading="lazy"/>
+            <span className="ig-card-grad"/>
+            <span className="ig-card-kind">{it.kind === 'feed' ? 'Feed' : 'Story'}</span>
+            <span className="ig-card-info">
+              <b>{it.title}</b>
+              <span className="mono">{it.tag}</span>
+            </span>
+            <span className="ig-card-zoom" aria-hidden><Icon name="plus" size={14}/></span>
+          </button>
+        ))}
+      </div>
+
+      {open && (
+        <div className="ig-lb" onClick={(e) => { if (e.target.classList.contains('ig-lb')) setIdx(null); }} role="dialog" aria-modal="true">
+          <button className="ig-lb-btn ig-lb-x" onClick={() => setIdx(null)} aria-label="Close"><Icon name="close" size={18}/></button>
+          <button className="ig-lb-btn ig-lb-prev" onClick={() => setIdx((idx - 1 + INSTAGRAM.length) % INSTAGRAM.length)} aria-label="Previous">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button className="ig-lb-btn ig-lb-next" onClick={() => setIdx((idx + 1) % INSTAGRAM.length)} aria-label="Next">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <figure className="ig-lb-fig">
+            <div className="ig-lb-imgwrap"><img src={open.src} alt={open.title}/></div>
+            <figcaption className="ig-lb-cap">
+              <div className="ig-lb-tag"><span className="dot"/>{open.kind === 'feed' ? 'Feed · 4:5' : 'Story · 9:16'} · {open.tag}</div>
+              <h3 style={{ fontSize: 'clamp(22px, 2.2vw, 30px)' }}>{open.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6 }}>{open.cap}</p>
+              <div className="ig-lb-meta">
+                <span><Icon name="briefcase" size={12}/> PT Merak Chemicals Indonesia</span>
+                <span><Icon name="sparkles" size={12}/> Design &amp; layout by Irfan</span>
+              </div>
+              <div className="ig-lb-foot">
+                <span className="mono" style={{ color: 'var(--accent)' }}>{String(idx + 1).padStart(2, '0')} / {String(INSTAGRAM.length).padStart(2, '0')}</span>
+                <span className="mono dimmer">← → keys · Esc to close</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      )}
+
+      <style>{`
+        .ig-head { margin-top: 64px; }
+        .ig-rail {
+          display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 14px;
+          scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin; scrollbar-color: var(--rule-2) transparent;
+        }
+        .ig-rail::-webkit-scrollbar { height: 7px; }
+        .ig-rail::-webkit-scrollbar-thumb { background: var(--rule-2); border-radius: 99px; }
+        .ig-rail::-webkit-scrollbar-track { background: transparent; }
+        .ig-card {
+          position: relative; flex: 0 0 auto; height: 320px; scroll-snap-align: start;
+          border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; background: var(--paper-3);
+          cursor: pointer; padding: 0; font-family: inherit; color: inherit; text-align: left;
+          transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease, border-color 0.4s ease;
+        }
+        .ig-card.feed  { aspect-ratio: 4 / 5; }
+        .ig-card.story { aspect-ratio: 9 / 16; }
+        .ig-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.97) brightness(0.95); transition: transform 0.65s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease; }
+        .ig-card:hover { transform: translateY(-3px); border-color: var(--rule-2); box-shadow: var(--shadow-2); }
+        .ig-card:hover img { transform: scale(1.05); filter: saturate(1.05) brightness(1); }
+        .ig-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+        .ig-card-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.16) 0%, transparent 26%, transparent 50%, rgba(0,0,0,0.8) 100%); pointer-events: none; }
+        .ig-card-kind {
+          position: absolute; top: 11px; left: 11px; padding: 4px 9px; border-radius: 999px;
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+          background: rgba(255,255,255,0.92); color: var(--accent-2); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.06);
+        }
+        .ig-card-info { position: absolute; left: 12px; right: 12px; bottom: 11px; display: flex; flex-direction: column; gap: 3px; color: #fff; }
+        .ig-card-info b { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; color: #fff; line-height: 1.25; }
+        .ig-card-info .mono { color: rgba(255,255,255,0.72); font-size: 9px; }
+        .ig-card-zoom { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%;
+          background: rgba(255,255,255,0.92); color: #1a1410; display: grid; place-items: center;
+          opacity: 0; transform: scale(0.85); transition: all 0.35s cubic-bezier(0.16,1,0.3,1); border: 1px solid rgba(0,0,0,0.06); }
+        .ig-card:hover .ig-card-zoom { opacity: 1; transform: scale(1); background: var(--accent); color: var(--on-accent); }
+
+        /* Lightbox */
+        .ig-lb { position: fixed; inset: 0; z-index: 9999; background: rgba(20,16,12,0.66); backdrop-filter: blur(22px); display: grid; place-items: center; padding: 32px; animation: lbFade 0.3s ease; }
+        .ig-lb-fig { margin: 0; display: flex; align-items: stretch; gap: 0; max-width: 980px; width: 100%; max-height: calc(100vh - 64px);
+          background: var(--paper-2); border: 1px solid var(--rule-2); border-radius: 22px; overflow: hidden;
+          box-shadow: 0 60px 120px -40px rgba(0,0,0,0.5); animation: lbPop 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        .ig-lb-imgwrap { flex: 0 0 auto; background: var(--paper-3); display: grid; place-items: center; }
+        .ig-lb-imgwrap img { display: block; height: calc(100vh - 64px); max-height: 620px; width: auto; max-width: 56vw; object-fit: contain; }
+        .ig-lb-cap { flex: 1 1 0; min-width: 280px; padding: 36px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+        .ig-lb-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; align-self: flex-start;
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+          background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); }
+        .ig-lb-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+        .ig-lb-meta { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--rule); color: var(--ink-3); font-size: 12px; }
+        .ig-lb-meta span { display: inline-flex; align-items: center; gap: 7px; }
+        .ig-lb-foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; }
+        .ig-lb-btn { position: fixed; z-index: 10000; width: 44px; height: 44px; border-radius: 50%;
+          background: var(--paper-2); border: 1px solid var(--rule-2); color: var(--ink); display: grid; place-items: center; cursor: pointer; transition: all 0.25s ease; }
+        .ig-lb-x { top: 24px; right: 24px; }
+        .ig-lb-prev { top: 50%; left: 24px; transform: translateY(-50%); }
+        .ig-lb-next { top: 50%; right: 24px; transform: translateY(-50%); }
+        .ig-lb-btn:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+        @media (max-width: 820px) {
+          .ig-card { height: 300px; }
+          .ig-lb-fig { flex-direction: column; max-height: 100dvh; }
+          .ig-lb-imgwrap img { height: auto; width: 100%; max-width: 100%; max-height: 46dvh; }
+          .ig-lb-cap { padding: 24px; }
+        }
+        @media (max-width: 720px) {
+          .ig-card { height: 260px; }
+          .ig-lb { padding: 0; }
+          .ig-lb-fig { border-radius: 0; height: 100dvh; max-height: 100dvh; overflow-y: auto; }
+          .ig-lb-prev, .ig-lb-next { display: none; }
+        }
+      `}</style>
+    </>
+  );
+}
+
 /* ---------- WORK ---------- */
 function Work() {
   return (
@@ -936,6 +1092,7 @@ function Work() {
         <AfterMovie/>
         <PowerBI/>
         <Activities/>
+        <SocialDesign/>
       </div>
     </section>
   );

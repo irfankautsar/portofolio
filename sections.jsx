@@ -189,7 +189,7 @@ function Hero() {
               border: '1px solid var(--hairline-strong)',
               boxShadow: '0 8px 24px -4px var(--c-shadow-09), 0 30px 60px -12px var(--c-shadow-10), 0 60px 120px -20px var(--c-shadow-12), 0 0 80px -30px var(--accent-glow)',
             }}>
-              <img src="assets/portrait.jpeg" alt="Muhammad Irfan Kautsar" style={{
+              <img src="assets/portrait.webp" alt="Muhammad Irfan Kautsar" style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%',
                 objectFit: 'cover', objectPosition: '55% 30%',
                 filter: 'saturate(0.95) contrast(1.02)',
@@ -603,7 +603,7 @@ function FeaturedAfterMovie() {
     }}>
       {/* PLAYER */}
       <div className="am-player" onClick={toggle}>
-        <img src="assets/after-movie-cover.jpg" alt="After Movie — MCCI Trainees"/>
+        <img src="assets/after-movie-cover.webp" alt="After Movie — MCCI Trainees"/>
         <div className="am-overlay"/>
 
         {/* Top-left tag */}
@@ -716,11 +716,169 @@ function FeaturedAfterMovie() {
   );
 }
 
+/* ---------- SOCIAL MEDIA DESIGN ---------- */
+const INSTAGRAM = [
+  { kind: 'feed',  src: 'assets/instagram/feed-safety-contest.webp',   title: 'Safety Contest 2026',     tag: 'HSE Campaign', cap: 'Membangun budaya keselamatan dan kesehatan kerja.' },
+  { kind: 'story', src: 'assets/instagram/story-safety-first.webp',     title: 'Safety First',            tag: 'HSE',          cap: 'Komitmen menjaga keselamatan dan kesehatan kerja.' },
+  { kind: 'story', src: 'assets/instagram/story-panen-raya.webp',       title: 'Panen Raya 2026',         tag: 'CSR · Agri',   cap: 'Menanam kepedulian, memanen kesejahteraan.' },
+  { kind: 'story', src: 'assets/instagram/story-peresmian-sumur.webp',  title: 'Peresmian Sumur',         tag: 'CSR · Water',  cap: 'Mengalirkan harapan, menghadirkan kehidupan melalui akses air bersih.' },
+  { kind: 'story', src: 'assets/instagram/story-hut-cilegon.webp',      title: 'HUT Kota Cilegon ke-27',  tag: 'Greeting',     cap: 'Selamat hari ulang tahun Kota Cilegon ke-27 · 27 April 2026.' },
+  { kind: 'story', src: 'assets/instagram/story-hari-buruh.webp',       title: 'Hari Buruh Nasional',     tag: 'Greeting',     cap: '“Kerja keras hari ini, untuk masa depan yang lebih baik.”' },
+];
+
+function SocialDesign() {
+  const [idx, setIdx] = React.useState(null);
+  const open = idx !== null ? INSTAGRAM[idx] : null;
+
+  React.useEffect(() => {
+    if (idx === null) return;
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    const onKey = (e) => {
+      if (e.key === 'Escape') setIdx(null);
+      if (e.key === 'ArrowRight') setIdx(i => (i + 1) % INSTAGRAM.length);
+      if (e.key === 'ArrowLeft')  setIdx(i => (i - 1 + INSTAGRAM.length) % INSTAGRAM.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = ''; document.body.classList.remove('modal-open'); window.removeEventListener('keydown', onKey); };
+  }, [idx]);
+
+  return (
+    <>
+      <div className="reveal" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginTop: 56, marginBottom: 24, flexWrap: 'wrap' }}>
+        <div>
+          <div className="mono" style={{ marginBottom: 8 }}>// social design · {INSTAGRAM.length} creatives</div>
+          <h3 style={{ fontSize: 28 }}>Social Media Design</h3>
+        </div>
+        <p style={{ fontSize: 14, color: 'var(--text-3)', maxWidth: 360 }}>
+          Instagram feed &amp; story creatives built for PT Merak Chemicals Indonesia — HSE, CSR, and corporate moments. Tap any to view full.
+        </p>
+      </div>
+
+      <div className="ig-rail">
+        {INSTAGRAM.map((it, i) => (
+          <button key={i} onClick={() => setIdx(i)} className={`ig-card ${it.kind}`} aria-label={`Open ${it.title}`}>
+            <img src={it.src} alt={it.title} loading="lazy"/>
+            <div className="ig-card-grad"/>
+            <div className="ig-card-kind">{it.kind === 'feed' ? 'Feed' : 'Story'}</div>
+            <div className="ig-card-info">
+              <b>{it.title}</b>
+              <span className="mono">{it.tag}</span>
+            </div>
+            <div className="ig-card-zoom" aria-hidden="true"><Icon name="plus" size={14}/></div>
+          </button>
+        ))}
+      </div>
+
+      {open && (
+        <div className="ig-lb" onClick={(e) => { if (e.target.classList.contains('ig-lb')) setIdx(null); }} role="dialog" aria-modal="true" aria-label={open.title}>
+          <button className="ig-lb-btn ig-lb-x" onClick={() => setIdx(null)} aria-label="Close"><Icon name="close" size={18}/></button>
+          <button className="ig-lb-btn ig-lb-prev" onClick={() => setIdx((idx - 1 + INSTAGRAM.length) % INSTAGRAM.length)} aria-label="Previous">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button className="ig-lb-btn ig-lb-next" onClick={() => setIdx((idx + 1) % INSTAGRAM.length)} aria-label="Next">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <figure className="ig-lb-fig">
+            <div className="ig-lb-imgwrap"><img src={open.src} alt={open.title}/></div>
+            <figcaption className="ig-lb-cap">
+              <div className="ig-lb-tag"><span className="dot"/>{open.kind === 'feed' ? 'Feed · 4:5' : 'Story · 9:16'} · {open.tag}</div>
+              <h3 style={{ fontSize: 'clamp(22px, 2.2vw, 30px)' }}>{open.title}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.6 }}>{open.cap}</p>
+              <div className="ig-lb-meta">
+                <span><Icon name="briefcase" size={12}/> PT Merak Chemicals Indonesia</span>
+                <span><Icon name="sparkles" size={12}/> Design &amp; layout by Irfan</span>
+              </div>
+              <div className="ig-lb-foot">
+                <span className="mono" style={{ color: 'var(--accent)' }}>{String(idx + 1).padStart(2, '0')} / {String(INSTAGRAM.length).padStart(2, '0')}</span>
+                <span className="mono lb-hint">← → keys · Esc to close</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      )}
+
+      <style>{`
+        .ig-rail {
+          display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 14px;
+          scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin; scrollbar-color: var(--hairline-strong) transparent;
+        }
+        .ig-rail::-webkit-scrollbar { height: 7px; }
+        .ig-rail::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 99px; }
+        .ig-rail::-webkit-scrollbar-track { background: transparent; }
+        .ig-card {
+          position: relative; flex: 0 0 auto; height: 320px; scroll-snap-align: start;
+          border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; background: var(--c-img-mount);
+          cursor: pointer; padding: 0; font-family: inherit; color: inherit; text-align: left;
+          transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease, border-color 0.4s ease;
+        }
+        .ig-card.feed  { aspect-ratio: 4 / 5; }
+        .ig-card.story { aspect-ratio: 9 / 16; }
+        .ig-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.97) brightness(0.95); transition: transform 0.65s cubic-bezier(0.16,1,0.3,1), filter 0.4s ease; }
+        .ig-card:hover { transform: translateY(-3px); border-color: var(--hairline-strong); box-shadow: var(--shadow-soft); }
+        .ig-card:hover img { transform: scale(1.05); filter: saturate(1.05) brightness(1); }
+        .ig-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+        .ig-card-grad { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.16) 0%, transparent 26%, transparent 50%, rgba(0,0,0,0.8) 100%); pointer-events: none; }
+        .ig-card-kind {
+          position: absolute; top: 11px; left: 11px; padding: 4px 9px; border-radius: 999px;
+          font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+          background: rgba(255,255,255,0.92); color: var(--accent-deep); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.06);
+        }
+        .ig-card-info { position: absolute; left: 12px; right: 12px; bottom: 11px; display: flex; flex-direction: column; gap: 3px; color: #fff; }
+        .ig-card-info b { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; color: #fff; line-height: 1.25; }
+        .ig-card-info .mono { color: rgba(255,255,255,0.72); font-size: 9px; }
+        .ig-card-zoom { position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%;
+          background: rgba(255,255,255,0.92); color: #1a1410; display: grid; place-items: center;
+          opacity: 0; transform: scale(0.85); transition: all 0.35s cubic-bezier(0.16,1,0.3,1); border: 1px solid rgba(0,0,0,0.06); }
+        .ig-card:hover .ig-card-zoom { opacity: 1; transform: scale(1); background: var(--accent); color: var(--c-on-accent); }
+
+        /* Lightbox */
+        .ig-lb { position: fixed; inset: 0; z-index: 9999; background: oklch(0 0 0 / 0.62); backdrop-filter: blur(22px); display: grid; place-items: center; padding: 32px; animation: lbFade 0.3s ease; }
+        @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+        .ig-lb-fig { margin: 0; display: flex; align-items: stretch; gap: 0; max-width: 980px; width: 100%; max-height: calc(100vh - 64px);
+          background: var(--c-bg-card); border: 1px solid var(--hairline-strong); border-radius: 22px; overflow: hidden;
+          box-shadow: 0 60px 120px -40px var(--c-shadow-12); animation: lbPop 0.5s cubic-bezier(0.16,1,0.3,1) both; }
+        @keyframes lbPop { 0% { opacity: 0; transform: scale(0.96) translateY(12px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+        .ig-lb-imgwrap { flex: 0 0 auto; background: var(--c-img-mount); display: grid; place-items: center; }
+        .ig-lb-imgwrap img { display: block; height: calc(100vh - 64px); max-height: 620px; width: auto; max-width: 56vw; object-fit: contain; }
+        .ig-lb-cap { flex: 1 1 0; min-width: 280px; padding: 36px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+        .ig-lb-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; align-self: flex-start;
+          font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+          background: color-mix(in oklch, var(--c-accent) 12%, transparent); color: var(--accent); border: 1px solid color-mix(in oklch, var(--c-accent) 28%, transparent); }
+        .ig-lb-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklch, var(--c-accent) 18%, transparent); }
+        .ig-lb-meta { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--hairline); color: var(--text-3); font-size: 12px; }
+        .ig-lb-meta span { display: inline-flex; align-items: center; gap: 7px; }
+        .ig-lb-foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; gap: 12px; }
+        .ig-lb-btn { position: fixed; z-index: 10000; width: 44px; height: 44px; border-radius: 50%;
+          background: var(--c-bg-card); border: 1px solid var(--hairline-strong); color: var(--text); display: grid; place-items: center; cursor: pointer; transition: all 0.25s ease; }
+        .ig-lb-x { top: 24px; right: 24px; }
+        .ig-lb-prev { top: 50%; left: 24px; transform: translateY(-50%); }
+        .ig-lb-next { top: 50%; right: 24px; transform: translateY(-50%); }
+        .ig-lb-btn:hover { background: var(--accent); color: var(--c-on-accent); border-color: var(--accent); }
+
+        @media (max-width: 820px) {
+          .ig-card { height: 300px; }
+          .ig-lb-fig { flex-direction: column; max-height: 100dvh; }
+          .ig-lb-imgwrap img { height: auto; width: 100%; max-width: 100%; max-height: 46dvh; }
+          .ig-lb-cap { padding: 24px; }
+        }
+        @media (max-width: 720px) {
+          .ig-card { height: 260px; }
+          .ig-lb { padding: 0; }
+          .ig-lb-fig { border-radius: 0; height: 100dvh; max-height: 100dvh; overflow-y: auto; }
+          .ig-lb-prev, .ig-lb-next { display: none; }
+        }
+      `}</style>
+    </>
+  );
+}
+
 function Projects() {
   // Real activities from internship at PT Merak Chemicals Indonesia
   const activities = [
     {
-      src: 'assets/activities/forum-csr-cilegon.jpg',
+      src: 'assets/activities/forum-csr-cilegon.webp',
       tag: 'CSR Forum',
       title: 'Cilegon City CSR Forum',
       year: '2026',
@@ -732,7 +890,7 @@ function Projects() {
       fit: 'cover',
     },
     {
-      src: 'assets/activities/team-corporate-affairs.jpg',
+      src: 'assets/activities/team-corporate-affairs.webp',
       tag: 'Team',
       title: 'Corporate Affairs Trainees',
       year: '2026',
@@ -742,7 +900,7 @@ function Projects() {
       role: 'Day-to-day teammate alongside three other trainees, splitting fieldwork, documentation, and content production.',
     },
     {
-      src: 'assets/activities/kacang-umpet.jpg',
+      src: 'assets/activities/kacang-umpet.webp',
       tag: 'UMKM · Branding',
       title: 'Kacang Umpet — Product Poster',
       year: '2025',
@@ -754,7 +912,7 @@ function Projects() {
       fit: 'cover',
     },
     {
-      src: 'assets/activities/saung-aksara.jpg',
+      src: 'assets/activities/saung-aksara.webp',
       tag: 'CSR · Literacy',
       title: 'Saung Aksara — Reading Room',
       year: '2025',
@@ -764,7 +922,7 @@ function Projects() {
       role: 'Logistics support during the program launch and follow-up documentation for the CSR report.',
     },
     {
-      src: 'assets/activities/ayam-petelur.jpg',
+      src: 'assets/activities/ayam-petelur.webp',
       tag: 'CSR · Livelihood',
       title: 'Ayam Petelur — Layer Hen Farm',
       year: '2026',
@@ -774,7 +932,7 @@ function Projects() {
       role: 'Field visit to verify progress, photograph the operation, and write the monthly progress note.',
     },
     {
-      src: 'assets/activities/umkm-kegiatan.jpg',
+      src: 'assets/activities/umkm-kegiatan.webp',
       tag: 'UMKM · Training',
       title: 'Rumah Siap Kerja — Culinary Workshop',
       year: '2025',
@@ -784,7 +942,7 @@ function Projects() {
       role: 'On-site documentation; later wrote the recap shared with both Diskop Cilegon and MCCI management.',
     },
     {
-      src: 'assets/activities/umkm-produk.jpg',
+      src: 'assets/activities/umkm-produk.webp',
       tag: 'UMKM · Graduation',
       title: 'UMKM Closing Ceremony',
       year: '2025',
@@ -794,7 +952,7 @@ function Projects() {
       role: 'Coordinated the closing event and captured the cohort portrait for the program report.',
     },
     {
-      src: 'assets/activities/kebun-gizi.jpg',
+      src: 'assets/activities/kebun-gizi.webp',
       tag: 'CSR · UMKM',
       title: 'UMKM Producer — Kebun Gizi',
       year: '2025',
@@ -804,7 +962,7 @@ function Projects() {
       role: 'Field visit and producer interview; photo used in the social-media and report rollout.',
     },
     {
-      src: 'assets/activities/nelayan.jpg',
+      src: 'assets/activities/nelayan.webp',
       tag: 'CSR · Fisheries',
       title: 'CSR MCCI × KKP — Fisheries Support',
       year: '2025',
@@ -814,7 +972,7 @@ function Projects() {
       role: 'Coordinated logistics with the KKP focal point and documented the handover for the CSR report.',
     },
     {
-      src: 'assets/activities/nelayan-kkp.jpg',
+      src: 'assets/activities/nelayan-kkp.webp',
       tag: 'CSR · Ramadhan',
       title: 'Donasi Ramadhan & Idul Fitri 1447H',
       year: '2026',
@@ -824,7 +982,7 @@ function Projects() {
       role: 'Part of the on-site MCCI team — handover, distribution flow, and documentation.',
     },
     {
-      src: 'assets/activities/mudik-walikota.jpg',
+      src: 'assets/activities/mudik-walikota.webp',
       tag: 'Community Event',
       title: 'Mudik Gratis 2026 — Opening Ceremony',
       year: '2026',
@@ -835,7 +993,7 @@ function Projects() {
       span: 'wide',
     },
     {
-      src: 'assets/activities/mudik-bus.jpg',
+      src: 'assets/activities/mudik-bus.webp',
       tag: 'Documentation',
       title: 'Mudik Gratis — Cilegon → Semarang, Bus #27',
       year: '2026',
@@ -845,7 +1003,7 @@ function Projects() {
       role: 'Captured the per-bus departure documentation used across MCCI socials and the Pemkot report.',
     },
     {
-      src: 'assets/activities/idul-adha.jpg',
+      src: 'assets/activities/idul-adha.webp',
       tag: 'CSR · Idul Adha',
       title: 'Qurban Prep — Villa Ternak',
       year: '2025',
@@ -855,7 +1013,7 @@ function Projects() {
       role: 'Site visit for livestock verification (count, condition, certification) before the program ran.',
     },
     {
-      src: 'assets/activities/sembako-ramadhan.jpg',
+      src: 'assets/activities/sembako-ramadhan.webp',
       tag: 'CSR · Ramadhan',
       title: 'Beras Donasi Idul Fitri 2026',
       year: '2026',
@@ -865,7 +1023,7 @@ function Projects() {
       role: 'Helped coordinate packing, loading, and distribution logistics across multiple drop points.',
     },
     {
-      src: 'assets/activities/industry-tour-its.jpg',
+      src: 'assets/activities/industry-tour-its.webp',
       tag: 'Industry · Hosting',
       title: 'ITS K63 Study Excursion',
       year: '2026',
@@ -875,7 +1033,7 @@ function Projects() {
       role: 'Front-of-house coordination for guest reception, welcome materials, and group portrait.',
     },
     {
-      src: 'assets/activities/powerbi-presentation.jpg',
+      src: 'assets/activities/powerbi-presentation.webp',
       tag: 'Reporting · Internal',
       title: 'Power BI Presentation — "My Task"',
       year: '2026',
@@ -1104,6 +1262,8 @@ function Projects() {
             </div>
           </div>
         )}
+
+        <SocialDesign />
       </div>
       <style>{`
         /* ============ AFTER MOVIE PLAYER ============ */
