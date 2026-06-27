@@ -556,52 +556,29 @@ function Experience() {
 
 /* ---------- AFTER MOVIE PLAYER ---------- */
 function AfterMovie() {
-  const aRef = React.useRef(null);
-  const [play, setPlay] = React.useState(false);
-  const [cur, setCur] = React.useState(0);
-  const [dur, setDur] = React.useState(0);
-  const fmt = s => isFinite(s) ? `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}` : '0:00';
-  const toggle = () => { const a = aRef.current; if (!a) return; a.paused ? a.play() : a.pause(); };
-  const seek = (e) => { const a = aRef.current; if (!a || !dur) return; const r = e.currentTarget.getBoundingClientRect(); a.currentTime = ((e.clientX - r.left) / r.width) * dur; };
-  React.useEffect(() => {
-    const a = aRef.current; if (!a) return;
-    const onPlay = () => setPlay(true);
-    const onPause = () => setPlay(false);
-    const onTime = () => setCur(a.currentTime);
-    const onMeta = () => setDur(a.duration);
-    a.addEventListener('play', onPlay); a.addEventListener('pause', onPause);
-    a.addEventListener('timeupdate', onTime); a.addEventListener('loadedmetadata', onMeta);
-    return () => { a.removeEventListener('play', onPlay); a.removeEventListener('pause', onPause); a.removeEventListener('timeupdate', onTime); a.removeEventListener('loadedmetadata', onMeta); };
-  }, []);
-  const pct = dur ? (cur/dur)*100 : 0;
+  const [playing, setPlaying] = React.useState(false);
+  const VIDEO = 'Hm87W2Rdo9g';
+  const WATCH = 'https://youtu.be/Hm87W2Rdo9g';
   return (
     <div className="rev am-card card">
-      <div className="am-cover" onClick={toggle} role="button" aria-label={play ? 'Pause' : 'Play'} data-cursor={play ? 'Pause' : 'Play'}>
-        <img src="assets/after-movie-cover.webp" alt="After Movie"/>
-        <div className="am-shade"/>
-        <div className="am-tag">After Movie · 2026</div>
-        <a href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing"
-           target="_blank" rel="noopener noreferrer" className="am-ext"
-           onClick={(e) => e.stopPropagation()}>
-          <Icon name="arrow-up-right" size={13}/> Full film
-        </a>
-        <div className={`am-play ${play ? 'on' : ''}`}>
-          {play ? <Icon name="pause" size={26}/> : <Icon name="play" size={26}/>}
-        </div>
-        {play && (
-          <div className="am-eq" aria-hidden>
-            {[0,1,2,3,4].map(i => <span key={i} style={{ animationDelay: `${i*0.12}s` }}/>)}
-          </div>
+      <div className="am-cover">
+        {playing ? (
+          <iframe
+            className="am-frame"
+            src={`https://www.youtube-nocookie.com/embed/${VIDEO}?autoplay=1&rel=0&modestbranding=1`}
+            title="MCCI Trainee Program — After Movie"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <button className="am-poster" onClick={() => setPlaying(true)} aria-label="Play After Movie" data-cursor="Play">
+            <img src="assets/after-movie-cover.webp" alt="After Movie" loading="lazy"/>
+            <span className="am-shade"/>
+            <span className="am-tag">After Movie · 2026</span>
+            <span className="am-ext"><Icon name="play" size={12}/> YouTube</span>
+            <span className="am-play"><Icon name="play" size={26}/></span>
+          </button>
         )}
-        <div className="am-ctrl" onClick={(e) => e.stopPropagation()}>
-          <span className="mono am-t">{fmt(cur)}</span>
-          <div className="am-bar" onClick={seek}>
-            <div className="am-fill" style={{ width: pct+'%' }}/>
-            <div className="am-thumb" style={{ left: pct+'%' }}/>
-          </div>
-          <span className="mono am-t">{dur ? fmt(dur) : '—:—'}</span>
-        </div>
-        <audio ref={aRef} src="assets/after-movie.mp3" preload="metadata"/>
       </div>
 
       <div className="am-info">
@@ -624,20 +601,24 @@ function AfterMovie() {
           ))}
         </div>
         <div className="am-ctas">
-          <a href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn accent mag" data-cursor="Watch">
-            <Icon name="play" size={14}/> Watch full film
-          </a>
-          <a href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="btn mag">
-            <Icon name="arrow-up-right" size={14}/> Open on Drive
+          {!playing && (
+            <button onClick={() => setPlaying(true)} className="btn accent mag" data-cursor="Play" style={{ font: 'inherit', cursor: 'pointer' }}>
+              <Icon name="play" size={14}/> Play here
+            </button>
+          )}
+          <a href={WATCH} target="_blank" rel="noopener noreferrer" className="btn mag">
+            <Icon name="arrow-up-right" size={14}/> Watch on YouTube
           </a>
         </div>
       </div>
 
       <style>{`
         .am-card { display: grid; grid-template-columns: 1.15fr 1fr; padding: 0; overflow: hidden; margin-bottom: 18px; }
-        .am-cover { position: relative; min-height: 420px; overflow: hidden; cursor: pointer; border-right: 1px solid var(--rule); }
-        .am-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.78); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-        .am-cover:hover img { transform: scale(1.04); }
+        .am-cover { position: relative; min-height: 420px; overflow: hidden; border-right: 1px solid var(--rule); background: #000; }
+        .am-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+        .am-poster { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: pointer; display: block; font: inherit; color: inherit; }
+        .am-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.78); transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+        .am-poster:hover img { transform: scale(1.04); }
         .am-shade { position: absolute; inset: 0; background:
           radial-gradient(ellipse at 30% 40%, rgba(200,85,42,0.25), transparent 55%),
           linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 30%, transparent 50%, rgba(0,0,0,0.75) 100%); pointer-events: none; }
@@ -648,8 +629,7 @@ function AfterMovie() {
           display: inline-flex; align-items: center; gap: 6px;
         }
         .am-tag { left: 18px; }
-        .am-ext { right: 18px; text-decoration: none; transition: all 0.25s ease; }
-        .am-ext:hover { background: var(--accent); color: #fff; }
+        .am-ext { right: 18px; }
         .am-play {
           position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
           width: 88px; height: 88px; border-radius: 50%;
@@ -658,17 +638,7 @@ function AfterMovie() {
           box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5);
           transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
         }
-        .am-cover:hover .am-play { transform: translate(-50%,-50%) scale(1.08); }
-        .am-play.on { background: var(--accent); color: var(--on-accent); box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 0 10px rgba(200,85,42,0.18); }
-        .am-eq { position: absolute; bottom: 84px; left: 50%; transform: translateX(-50%); display: flex; align-items: flex-end; gap: 4px; height: 26px; pointer-events: none; }
-        .am-eq span { display: block; width: 3px; height: 100%; background: var(--accent); border-radius: 2px; box-shadow: 0 0 10px var(--accent-glow); transform-origin: bottom; animation: eq 0.9s ease-in-out infinite alternate; }
-        @keyframes eq { 0% { transform: scaleY(0.2); } 100% { transform: scaleY(1); } }
-        .am-ctrl { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; align-items: center; gap: 14px; color: #fff; }
-        .am-t { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.5); min-width: 36px; }
-        .am-bar { flex: 1; height: 4px; border-radius: 99px; background: rgba(255,255,255,0.3); position: relative; cursor: pointer; }
-        .am-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 99px; box-shadow: 0 0 10px var(--accent-glow); }
-        .am-thumb { position: absolute; top: 50%; width: 12px; height: 12px; border-radius: 50%; background: #fff; transform: translate(-50%,-50%); opacity: 0; transition: opacity 0.2s ease; }
-        .am-bar:hover .am-thumb { opacity: 1; }
+        .am-poster:hover .am-play { transform: translate(-50%,-50%) scale(1.08); background: var(--accent); color: var(--on-accent); box-shadow: 0 20px 60px -10px rgba(0,0,0,0.5), 0 0 0 10px rgba(200,85,42,0.18); }
 
         .am-info { padding: clamp(28px, 4vw, 44px); display: flex; flex-direction: column; gap: 16px; justify-content: center; }
         .am-credits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 16px; border: 1px solid var(--rule); border-radius: 14px; background: var(--paper-3); }

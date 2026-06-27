@@ -543,52 +543,9 @@ function Skills() {
 
 /* ---------------------------- PROJECTS ---------------------------- */
 function FeaturedAfterMovie() {
-  const audioRef = React.useRef(null);
   const [playing, setPlaying] = React.useState(false);
-  const [current, setCurrent] = React.useState(0);
-  const [duration, setDuration] = React.useState(0);
-  const [ready, setReady] = React.useState(false);
-
-  const fmt = (s) => {
-    if (!isFinite(s)) return '0:00';
-    const m = Math.floor(s / 60);
-    const sec = Math.floor(s % 60).toString().padStart(2, '0');
-    return `${m}:${sec}`;
-  };
-
-  const toggle = () => {
-    const a = audioRef.current; if (!a) return;
-    if (a.paused) a.play(); else a.pause();
-  };
-  const seek = (e) => {
-    const a = audioRef.current; if (!a || !duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    a.currentTime = pct * duration;
-  };
-
-  React.useEffect(() => {
-    const a = audioRef.current; if (!a) return;
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
-    const onTime = () => setCurrent(a.currentTime);
-    const onMeta = () => { setDuration(a.duration); setReady(true); };
-    const onEnd = () => setPlaying(false);
-    a.addEventListener('play', onPlay);
-    a.addEventListener('pause', onPause);
-    a.addEventListener('timeupdate', onTime);
-    a.addEventListener('loadedmetadata', onMeta);
-    a.addEventListener('ended', onEnd);
-    return () => {
-      a.removeEventListener('play', onPlay);
-      a.removeEventListener('pause', onPause);
-      a.removeEventListener('timeupdate', onTime);
-      a.removeEventListener('loadedmetadata', onMeta);
-      a.removeEventListener('ended', onEnd);
-    };
-  }, []);
-
-  const pct = duration ? (current / duration) * 100 : 0;
+  const VIDEO = 'Hm87W2Rdo9g';
+  const WATCH = 'https://youtu.be/Hm87W2Rdo9g';
 
   const credits = [
     { role: 'Director', name: 'MCCI Trainee Team', sub: 'Concept · Creative direction' },
@@ -602,54 +559,32 @@ function FeaturedAfterMovie() {
       display: 'grid', gridTemplateColumns: '1.15fr 1fr', gap: 0,
     }}>
       {/* PLAYER */}
-      <div className="am-player" onClick={toggle}>
-        <img src="assets/after-movie-cover.webp" alt="After Movie — MCCI Trainees"/>
-        <div className="am-overlay"/>
-
-        {/* Top-left tag */}
-        <div className="am-badge">
-          <span className="am-badge-dot"/> After Movie · 2026
-        </div>
-
-        {/* Top-right: external link to Drive */}
-        <a
-          href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="am-drive"
-          onClick={(e) => e.stopPropagation()}
-          title="Watch full film on Google Drive"
-        >
-          <Icon name="arrow-up-right" size={13}/> Full film
-        </a>
-
-        {/* Center play button */}
-        <div className={`am-play ${playing ? 'is-playing' : ''}`}>
-          {playing ? (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-          ) : (
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          )}
-        </div>
-
-        {/* Equalizer animation when playing */}
-        {playing && (
-          <div className="am-eq" aria-hidden="true">
-            {[0,1,2,3,4].map(i => <span key={i} style={{ animationDelay: `${i * 0.12}s` }}/>)}
-          </div>
+      <div className="am-player" style={{ cursor: playing ? 'default' : 'pointer', background: '#000' }}>
+        {playing ? (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${VIDEO}?autoplay=1&rel=0&modestbranding=1`}
+            title="MCCI Trainee Program — After Movie"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0, display: 'block' }}
+          />
+        ) : (
+          <button
+            onClick={() => setPlaying(true)}
+            aria-label="Play After Movie"
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', padding: 0, margin: 0, border: 0, background: 'none', cursor: 'pointer' }}
+          >
+            <img src="assets/after-movie-cover.webp" alt="After Movie — MCCI Trainees" loading="lazy"/>
+            <div className="am-overlay"/>
+            <div className="am-badge"><span className="am-badge-dot"/> After Movie · 2026</div>
+            <div className="am-drive" style={{ pointerEvents: 'none' }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> YouTube
+            </div>
+            <div className="am-play">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </button>
         )}
-
-        {/* Progress bar */}
-        <div className="am-controls" onClick={(e) => e.stopPropagation()}>
-          <div className="am-time">{fmt(current)}</div>
-          <div className="am-progress" onClick={seek}>
-            <div className="am-progress-fill" style={{ width: pct + '%' }}/>
-            <div className="am-progress-thumb" style={{ left: pct + '%' }}/>
-          </div>
-          <div className="am-time">{ready ? fmt(duration) : '—:—'}</div>
-        </div>
-
-        <audio ref={audioRef} src="assets/after-movie.mp3" preload="metadata"/>
       </div>
 
       {/* INFO */}
@@ -683,33 +618,31 @@ function FeaturedAfterMovie() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', marginTop: 4 }}>
+          {!playing && (
+            <button
+              onClick={() => setPlaying(true)}
+              className="btn primary"
+              style={{ padding: '12px 20px', fontSize: 13, cursor: 'pointer' }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Play here
+            </button>
+          )}
           <a
-            href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn primary"
-            style={{ padding: '12px 20px', fontSize: 13 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            Watch full film
-          </a>
-          <a
-            href="https://drive.google.com/file/d/1J5MDde7BwWB0mqWOgC7nFZXj3PbryCAT/view?usp=sharing"
+            href={WATCH}
             target="_blank"
             rel="noopener noreferrer"
             className="btn"
             style={{ padding: '12px 18px', fontSize: 13 }}
-            onClick={(e) => e.stopPropagation()}
           >
-            <Icon name="arrow-up-right" size={14}/> Open on Drive
+            <Icon name="arrow-up-right" size={14}/> Watch on YouTube
           </a>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, color: 'var(--text-3)', fontSize: 12 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="calendar" size={12}/> 2026</span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="pin" size={12}/> PT Merak Chemicals Indonesia</span>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={12}/> Audio preview · Full film on Drive</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}><Icon name="clock" size={12}/> Full film · Watch on YouTube</span>
         </div>
       </div>
     </div>

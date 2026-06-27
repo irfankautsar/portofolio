@@ -28,7 +28,7 @@
    ============================================================ */
 :root, [data-theme="light"] {
   /* Apple-style neutral base */
-  --c-bg:            oklch(0.99 0 0);
+  --c-bg:            oklch(0.97 0.012 75);
   --c-panel:         oklch(0.97 0 0);
   --c-panel-2:       oklch(0.96 0 0);
   --c-bg2:           oklch(0.94 0 0);
@@ -521,11 +521,11 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
 
 #root { position: relative; z-index: 2; }
 
-/* ===== Bubbly interactive bg ===== */
+/* ===== Warm interactive background ===== */
 .bubbles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; contain: strict; }
 .bubble {
   position: absolute; top: 0; left: 0;
-  border-radius: 50%; filter: blur(64px); opacity: 0.40;
+  border-radius: 50%; filter: blur(64px); opacity: 0.42;
   will-change: transform; transform: translateZ(0); backface-visibility: hidden;
   transition: opacity 0.6s ease;
 }
@@ -566,9 +566,9 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-  <script type="text/babel" src="icons.jsx?v=5"></script>
-  <script type="text/babel" src="sections.jsx?v=5"></script>
-  <script type="text/babel" src="app.jsx?v=5"></script>
+  <script type="text/babel" src="icons.jsx?v=6"></script>
+  <script type="text/babel" src="sections.jsx?v=6"></script>
+  <script type="text/babel" src="app.jsx?v=6"></script>
 
   <script>
     // ---- Theme toggle: instant flip ----
@@ -580,12 +580,12 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
       try { localStorage.setItem('theme', next); } catch (er) {}
     });
 
-    // ---- Bubbly interactive background ----
+    // ---- Warm interactive background ----
     (function bubbleBG() {
       const wrap = document.querySelector('.bubbles');
       if (!wrap) return;
       const palettes = {
-        light: ['#ff8a4c', '#ffd166', '#7aa6ff', '#ff6b9d', '#c9b8ff'],
+        light: ['#e8c39a', '#f1ddc2', '#e7b98a', '#d9a679', '#c99a6e'],
         dark:  ['#ff3b30', '#ff8a00', '#ff5b9c', '#a020e8', '#3a7afe'],
       };
       const N = 7;
@@ -624,7 +624,7 @@ body.modal-open #scroll-top { opacity: 0; pointer-events: none; }
         scrollV *= 0.86;
         for (const b of bs) {
           b.x += b.vx; b.y += b.vy;
-          b.y -= kick * (0.6 + b.hue * 0.25);   // bigger displacement on different bubbles
+          b.y -= kick * (0.6 + b.hue * 0.25);
           if (b.x < -b.s/2) b.x = W + b.s/2;
           if (b.x > W + b.s/2) b.x = -b.s/2;
           if (b.y < -b.s/2) b.y = H + b.s/2;
